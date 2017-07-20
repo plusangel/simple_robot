@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!--Move wheels custom behaviour-->
+  <gazebo>
+    <plugin name="move_wheels" filename="libmoveWheels_plugin.so">
+    </plugin>
+  </gazebo>
+</robot>
