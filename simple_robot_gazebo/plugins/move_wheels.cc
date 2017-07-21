@@ -60,7 +60,7 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   ROS_INFO("MoveWheels Plugin: Loaded succesfully");
 }
 
-void MoveWheelsPlugin::left_velocity_callback(const std_msgs::Int32ConstPtr &_msg)
+void MoveWheelsPlugin::left_velocity_callback(const std_msgs::Float32ConstPtr &_msg)
 {
   //ROS_INFO("Callback iteration");
   double vl =(double)(_msg->data);
@@ -70,13 +70,13 @@ void MoveWheelsPlugin::left_velocity_callback(const std_msgs::Int32ConstPtr &_ms
 
 }
 
-void MoveWheelsPlugin::right_velocity_callback(const std_msgs::Int32ConstPtr &_msg)
+void MoveWheelsPlugin::right_velocity_callback(const std_msgs::Float32ConstPtr &_msg)
 {
   //ROS_INFO("Callback iteration");
   double vr =(double)(_msg->data);
   //ROS_INFO("%f rad/s velocity for right wheels", vr);
   this->jointList[1]->SetParam("fmax", 0, 10000.0);
-  this->jointList[1]->SetParam("vel", 0, -vr);
+  this->jointList[1]->SetParam("vel", 0, vr);
 
 }
 

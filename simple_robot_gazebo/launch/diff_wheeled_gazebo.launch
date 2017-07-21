@@ -24,7 +24,7 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
 	args="-urdf -model diff_wheeled_robot -param robot_description"/>
 
-  <include file="$(find simple_robot_control)/launch/mock_velocities.launch">
-  </include>
-  
+  <!--<include file="$(find simple_robot_control)/launch/mock_velocities.launch">
+</include>-->
+
 </launch>

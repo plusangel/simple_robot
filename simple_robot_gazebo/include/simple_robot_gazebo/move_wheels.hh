@@ -8,7 +8,7 @@
 #include "ros/ros.h"
 #include "ros/callback_queue.h"
 #include "ros/subscribe_options.h"
-#include "std_msgs/Int32.h"
+#include "std_msgs/Float32.h"
 
 namespace gazebo
 {
@@ -27,10 +27,10 @@ namespace gazebo
     public: void OnUpdate(const common::UpdateInfo & /*_info*/);
 
     // ROS topic callback
-    public: void left_velocity_callback(const std_msgs::Int32ConstPtr &_msg);
+    public: void left_velocity_callback(const std_msgs::Float32ConstPtr &_msg);
 
     // ROS topic callback
-    public: void right_velocity_callback(const std_msgs::Int32ConstPtr &_msg);
+    public: void right_velocity_callback(const std_msgs::Float32ConstPtr &_msg);
 
 
 

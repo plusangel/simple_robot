@@ -1,0 +1,7 @@
+<launch>
+
+  <node pkg="simple_robot_control" type="diff_drive_controller.py" name="diff_drive_controller" output="screen" >
+    <rosparam file="$(find simple_robot_control)/config/diff_drive_parameters.yaml" command="load" />
+  </node>
+
+</launch>

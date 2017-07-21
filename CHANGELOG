@@ -1,2 +1,8 @@
 0.1 simple_robot
 Initial commit
+
+0.2 simple_robot
+Twist_To_Motors interface implemented by applying differential drive classic
+equations.
+moveMotors plugin changed from Int to Float to simplify the control (standrd
+input from the keypboard)
