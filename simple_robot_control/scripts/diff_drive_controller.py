@@ -4,7 +4,7 @@ import rospy
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float32
 
-class ControllerNode:
+class controller_node:
 
     def __init__(self):
         self.linearVelocity = 0.0
@@ -66,7 +66,7 @@ class ControllerNode:
 
 if __name__ == '__main__':
     try:
-        node = ControllerNode()
+        node = controller_node()
         node.main()
     except rospy.ROSInterruptException:
         pass

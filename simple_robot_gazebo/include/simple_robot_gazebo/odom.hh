@@ -1,0 +1,59 @@
+#ifndef _GET_ODOM_PLUGIN_HH
+#define _GET_ODOM_PLUGIN_HH
+
+#include <gazebo/gazebo.hh>
+#include <gazebo/physics/physics.hh>
+
+// ROS
+#include "ros/ros.h"
+#include "nav_msgs/Odometry.h"
+#include <tf/tf.h>
+#include <tf/transform_broadcaster.h>
+#include <tf/transform_listener.h>
+
+// Boost
+#include <boost/bind.hpp>
+
+namespace gazebo
+{
+  class OdomPlugin : public ModelPlugin
+  {
+    public: OdomPlugin();
+    public: ~OdomPlugin();
+
+    public: void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+    protected: virtual void UpdateChild();
+
+    private:
+      void write_position_data();
+      void publish_odometry();
+
+      physics::WorldPtr world;
+      physics::ModelPtr parent;
+      event::ConnectionPtr updateConnection;
+
+      double wheelSpeed[2];
+      double odomPose[3];
+      double odomVel[3];
+
+      physics::JointPtr joints[2];
+      physics::PhysicsEnginePtr physicsEngine;
+
+      std::string leftJointName;
+      std::string rightJointName;
+      std::string robotNamespace;
+
+      double wheelSeparation;
+      double wheelDiameter;
+
+      // ROS stuff
+      ros::NodeHandle *rosnode_;
+      ros::Publisher pub_;
+      nav_msgs::Odometry odom_;
+
+      tf::TransformBroadcaster *transform_broadcaster_;
+      std::string tf_prefix_;
+  };
+}
+
+#endif
