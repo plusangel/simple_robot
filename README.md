@@ -1,18 +1,15 @@
-# innoclimber
+# simple_robot
 
 This is the source for the simple_robot project (ROS + Gazebo)
 This robot does not have attached any trasmission and controllers
-A pure model of a differential robot for control expreriments
+A pure model of a differential robot for control expreriments and not only!
 
 ## Instuctions
 
 Gazebo simulation:
 roslaunch simple_robot_gazebo diff_wheeled_gazebo.launch
 
-
 Rviz:
-
-roslaunch simple_robot_description view_mobile_robot.launc
 
 Check the model: roslaunch innoclimber_visual view_model.launch
 
@@ -24,7 +21,7 @@ Ubuntu Xenial 16.04,
 
 ROS Kinetic,
 
-Gazebo 7.8
+Gazebo 7.x
 
 
 ## Contributing
