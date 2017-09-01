@@ -7,6 +7,12 @@
     </plugin>
   </gazebo>
 
+  <!--Get encoders ticks behaviour-->
+  <gazebo>
+    <plugin name="encoders_ticks" filename="libencodersTicks_plugin.so">
+    </plugin>
+  </gazebo>
+
   <!--Get Odometry-->
   <gazebo>
     <plugin name="get_odom" filename="libgetOdom_plugin.so">

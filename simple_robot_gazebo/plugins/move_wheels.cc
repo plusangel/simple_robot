@@ -25,11 +25,11 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   // Safety check
   if (model->GetJointCount() == 0)
   {
-    ROS_ERROR("Invalid joint count, Velodyne plugin not loaded");
+    ROS_ERROR("[move_wheels]: Invalid joint count, plugin not loaded");
     return;
   } else
   {
-    ROS_INFO("Plugin found %d joints on the model", model->GetJointCount());
+    ROS_INFO("[move_wheels]: Plugin found %d joints on the model", model->GetJointCount());
   }
 
   jointList = model->GetJoints();
@@ -38,14 +38,14 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   /*ROS_INFO("The number of links are: %ld", linkList.size());
   */
   for (unsigned i = 0; i < jointList.size(); i++) {
-    ROS_INFO("[%d]: %s", i, (jointList[i]->GetName()).c_str());
+    ROS_INFO("[move_wheels]: (%d): %s", i, (jointList[i]->GetName()).c_str());
   }
 
 
   // Load ROS - initialize ros
   if (!ros::isInitialized())
   {
-    gzerr << "Not loading plugin since ROS hasn't been properly initialized.\n";
+    gzerr << "[move_wheels]: Not loading plugin since ROS hasn't been properly initialized.\n";
     return;
   }
 
@@ -57,7 +57,7 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   this->rWheels_vel = this->rosNode->subscribe("/rWheels", 10, &MoveWheelsPlugin::right_velocity_callback, this);
 
 
-  ROS_INFO("MoveWheels Plugin: Loaded succesfully");
+  ROS_INFO("[move_wheels]: MoveWheels Plugin: Loaded succesfully");
 }
 
 void MoveWheelsPlugin::left_velocity_callback(const std_msgs::Float32ConstPtr &_msg)

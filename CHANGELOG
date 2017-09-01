@@ -9,3 +9,6 @@ input from the keypboard)
 
 0.3 simple_robot
 Odometry plugin added
+
+0.4 simple_robot
+First cut of encoders added to the simulation

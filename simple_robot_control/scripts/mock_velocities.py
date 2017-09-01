@@ -11,8 +11,8 @@ def mock_velocoties():
     rate = rospy.Rate(20)
 
     while not rospy.is_shutdown():
-        vl = Float32(1)
-        vr = Float32(1)
+        vl = Float32(-1)
+        vr = Float32(-1)
         #rospy.loginfo("Publishing mock velocities to topics...")
         pub_left_vel.publish(vl)
         pub_right_vel.publish(vr)

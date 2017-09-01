@@ -40,5 +40,8 @@ include_directories(
 add_library(moveWheels_plugin plugins/move_wheels.cc)
 target_link_libraries(moveWheels_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
+add_library(encodersTicks_plugin plugins/encoders_ticks.cc)
+target_link_libraries(encodersTicks_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+
 add_library(odom_plugin plugins/odom.cc)
 target_link_libraries(odom_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
