@@ -10,27 +10,33 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   gazebo_ros
   gazebo_plugins
+  std_msgs
+  message_generation
 )
 
 # Depend on system install of Gazebo
 find_package(gazebo REQUIRED)
 
+add_message_files(
+  FILES
+  encoders.msg
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES diff_wheeled_robot_gazebo
-#  CATKIN_DEPENDS gazebo_msgs gazebo_plugins gazebo_ros gazebo_ros_control simple_robot_description
+  CATKIN_DEPENDS gazebo_msgs gazebo_plugins gazebo_ros simple_robot_description message_runtime
   DEPENDS roscpp gazebo_ros
 )
-
-###########
-## Build ##
-###########
 
 link_directories(${GAZEBO_LIBRARY_DIRS})
 include_directories(${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
 
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}

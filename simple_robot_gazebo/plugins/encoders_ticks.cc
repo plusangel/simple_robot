@@ -51,7 +51,7 @@ void EncodersTicksPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 
   // ros stuff
   this->rosNode = new ros::NodeHandle("");
-
+  encoders_pub = rosNode->advertise<simple_robot_gazebo::encoders>("encoders", 1);
 
   ROS_INFO("[encoders_ticks]: EncodersTicks Plugin: Loaded succesfully");
 }
@@ -59,15 +59,25 @@ void EncodersTicksPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 void EncodersTicksPlugin::OnUpdate(const common::UpdateInfo & /*_info*/)
 {
   double time = ros::Time::now().toSec();
+  time *= pow(10, 3);
+  uint milliTime = (uint) time;
   math::Angle left_angle = (this->jointList[0])->GetAngle(0);
 
-  double angle_l = left_angle.Radian();
-  ROS_INFO("[encoders_ticks]: Left %f at %f", angle_l*(180/M_PI), time);
+  double angle_left = left_angle.Radian();
+  double encoder_left = angle_left*(180/M_PI);
+  ROS_INFO("[encoders_ticks]: Left %f at %d", encoder_left, milliTime);
 
   math::Angle right_angle = (this->jointList[1])->GetAngle(0);
 
-  double angle_r = right_angle.Radian();
-  ROS_INFO("[encoders_ticks]: Right %f at %f", angle_r*(180/M_PI), time);
+  double angle_right = right_angle.Radian();
+  double encoder_right = angle_right*(180/M_PI);
+  ROS_INFO("[encoders_ticks]: Right %f at %d", encoder_right, milliTime);
+
+  simple_robot_gazebo::encoders msg;
+  msg.encoderTicks = {(float)encoder_left, (float)encoder_right};
+  msg.timeStamp = milliTime;
+  encoders_pub.publish(msg);
+
 }
 
 GZ_REGISTER_MODEL_PLUGIN(EncodersTicksPlugin)

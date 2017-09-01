@@ -7,6 +7,7 @@
 #include "ros/ros.h"
 #include "std_msgs/Int32.h"
 #include <cmath>
+#include "simple_robot_gazebo/encoders.h"
 
 namespace gazebo
 {
@@ -39,10 +40,9 @@ namespace gazebo
     // Pointer to the update event connection
     private: event::ConnectionPtr updateConnection;
 
-
     // ROS NodeHanle
     private: ros::NodeHandle* rosNode;
-
+    private: ros::Publisher encoders_pub;
   };
 }
 #endif

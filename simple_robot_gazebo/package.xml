@@ -1,25 +1,28 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_gazebo</name>
-  <version>0.0.0</version>
+  <version>0.0.5</version>
   <description>The diff_wheeled_robot_gazebo package</description>
 
-  <maintainer email="robot@todo.todo">robot</maintainer>
-  <license>TODO</license>
+  <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
 
-  <buildtool_depend>catkin</buildtool_depend>
+  <license>BSD</license>
+
+  <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>
 
   <build_depend>gazebo_msgs</build_depend>
   <build_depend>gazebo_plugins</build_depend>
   <build_depend>gazebo_ros</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>simple_robot_description</build_depend>
+  <build_depend>message_generation</build_depend>
 
   <run_depend>gazebo_msgs</run_depend>
   <run_depend>gazebo_plugins</run_depend>
   <run_depend>gazebo_ros</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>simple_robot_description</run_depend>
+  <run_depend>message_runtime</run_depend>
 
   <export>
     <gazebo_ros plugin_path="${prefix}/lib" gazebo_media_path="${prefix}" />
