@@ -7,6 +7,7 @@
 // ROS
 #include "ros/ros.h"
 #include "nav_msgs/Odometry.h"
+#include "geometry_msgs/Pose2D.h"
 #include <tf/tf.h>
 #include <tf/transform_broadcaster.h>
 #include <tf/transform_listener.h>
@@ -25,7 +26,6 @@ namespace gazebo
     protected: virtual void UpdateChild();
 
     private:
-      void write_position_data();
       void publish_odometry();
 
       physics::WorldPtr world;
@@ -48,8 +48,11 @@ namespace gazebo
 
       // ROS stuff
       ros::NodeHandle *rosnode_;
-      ros::Publisher pub_;
+      ros::Publisher pub_odom;
+      ros::Publisher pub_pose;
+
       nav_msgs::Odometry odom_;
+      geometry_msgs::Pose2D pose_;
 
       tf::TransformBroadcaster *transform_broadcaster_;
       std::string tf_prefix_;

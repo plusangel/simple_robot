@@ -1,0 +1,5 @@
+<launch>
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(find simple_robot_description)/urdf/diff_wheeled_robot.xacro --inorder" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+</launch>

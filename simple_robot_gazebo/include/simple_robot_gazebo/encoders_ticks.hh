@@ -7,7 +7,7 @@
 #include "ros/ros.h"
 #include "std_msgs/Int32.h"
 #include <cmath>
-#include "simple_robot_gazebo/encoders.h"
+#include <simple_robot_gazebo/encoders.h>
 
 namespace gazebo
 {
@@ -24,12 +24,6 @@ namespace gazebo
 
     // Called by the world update start event
     public: void OnUpdate(const common::UpdateInfo & /*_info*/);
-
-    // ROS topic callback
-    public: void left_encoder_ticks_callback(const std_msgs::Int32ConstPtr &_msg);
-
-    // ROS topic callback
-    public: void right_encoder_ticks_callback(const std_msgs::Int32ConstPtr &_msg);
 
     // Pointer to the model
     private: physics::ModelPtr model;

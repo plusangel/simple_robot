@@ -4,6 +4,7 @@ using namespace gazebo;
 
 EncodersTicksPlugin::EncodersTicksPlugin() : ModelPlugin()
 {
+
 }
 
 
@@ -65,13 +66,13 @@ void EncodersTicksPlugin::OnUpdate(const common::UpdateInfo & /*_info*/)
 
   double angle_left = left_angle.Radian();
   double encoder_left = angle_left*(180/M_PI);
-  ROS_INFO("[encoders_ticks]: Left %f at %d", encoder_left, milliTime);
+  //ROS_INFO("[encoders_ticks]: Left %f at %d", encoder_left, milliTime);
 
   math::Angle right_angle = (this->jointList[1])->GetAngle(0);
 
   double angle_right = right_angle.Radian();
   double encoder_right = angle_right*(180/M_PI);
-  ROS_INFO("[encoders_ticks]: Right %f at %d", encoder_right, milliTime);
+  //ROS_INFO("[encoders_ticks]: Right %f at %d", encoder_right, milliTime);
 
   simple_robot_gazebo::encoders msg;
   msg.encoderTicks = {(float)encoder_left, (float)encoder_right};

@@ -24,24 +24,24 @@ void OdomPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   this->parent = _parent;
   this->world = _parent->GetWorld();
 
-  ROS_INFO(">>plugin parent: %s", parent->GetName().c_str());
+  ROS_INFO("[odom]: plugin parent: %s", parent->GetName().c_str());
 
   if (!this->parent)
   {
-    ROS_ERROR(">>Plugin requires a Model as its parent");
+    ROS_ERROR("[odom]: Plugin requires a Model as its parent");
   }
 
   this->leftJointName = (_sdf->GetElement("leftJoint")->Get<std::string>());
-  ROS_INFO (">>leftJointName: %s", this->leftJointName.c_str());
+  ROS_INFO ("[odom]: leftJointName: %s", this->leftJointName.c_str());
 
   this->rightJointName = (_sdf->GetElement("rightJoint")->Get<std::string>());
-  ROS_INFO (">>rightJointName: %s", this->rightJointName.c_str());
+  ROS_INFO ("[odom]: rightJointName: %s", this->rightJointName.c_str());
 
   this->wheelSeparation = atof((_sdf->GetElement("wheelSeparation")->Get<std::string>()).c_str());
-  ROS_INFO (">>wheelSeparation: %f", this->wheelSeparation);
+  ROS_INFO ("[odom]: wheelSeparation: %f", this->wheelSeparation);
 
   this->wheelDiameter = atof((_sdf->GetElement("wheelDiameter")->Get<std::string>()).c_str());
-  ROS_INFO (">>wheelDiameter: %f", this->wheelDiameter);
+  ROS_INFO ("[odom]: wheelDiameter: %f", this->wheelDiameter);
 
   this->robotNamespace = "";
 
@@ -54,12 +54,13 @@ void OdomPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   ros::init(argc, argv, "odom_plugin", ros::init_options::NoSigintHandler | ros::init_options::AnonymousName);
   rosnode_ = new ros::NodeHandle(this->robotNamespace);
 
-  ROS_INFO(">>starting odom plugin in ns: %s", this->robotNamespace.c_str());
+  ROS_INFO("[odom]: starting odom plugin in ns: %s", this->robotNamespace.c_str());
 
   tf_prefix_ = tf::getPrefixParam(*rosnode_);
   transform_broadcaster_ = new tf::TransformBroadcaster();
 
-  pub_ = rosnode_->advertise<nav_msgs::Odometry>("odom", 1);
+  pub_odom = rosnode_->advertise<nav_msgs::Odometry>("odom", 1);
+  pub_pose = rosnode_->advertise<geometry_msgs::Pose2D>("pose", 1);
 
   // Reset odometric pose
   odomPose[0] = 0.0;
@@ -103,7 +104,6 @@ void OdomPlugin::UpdateChild()
   odomVel[1] = 0.0;
   odomVel[2] = da / stepTime;
 
-  write_position_data();
   publish_odometry();
 }
 
@@ -141,30 +141,18 @@ void OdomPlugin::publish_odometry()
    odom_.header.frame_id = odom_frame;
    odom_.child_frame_id = base_footprint_frame;
 
-   pub_.publish(odom_);
+   pub_odom.publish(odom_);
 
-}
 
-void OdomPlugin::write_position_data()
-{
-  // // TODO: Data timestamp
-  // pos_iface_->data->head.time = Simulator::Instance()->GetSimTime().Double();
+   double roll, pitch, yaw;
+   tf::Matrix3x3(qt).getRPY(roll, pitch, yaw);
+   //ROS_INFO("[odom]: Yaw: %f", yaw);
 
-  // pose.pos.x = odomPose[0];
-  // pose.pos.y = odomPose[1];
-  // pose.rot.GetYaw() = NORMALIZE(odomPose[2]);
+   pose_.x = pose.pos.x;
+   pose_.y = pose.pos.y;
+   pose_.theta = yaw;
 
-  // pos_iface_->data->velocity.pos.x = odomVel[0];
-  // pos_iface_->data->velocity.yaw = odomVel[2];
-
-  math::Pose orig_pose = this->parent->GetWorldPose();
-
-  math::Pose new_pose = orig_pose;
-  new_pose.pos.x = odomPose[0];
-  new_pose.pos.y = odomPose[1];
-  new_pose.rot.SetFromEuler(math::Vector3(0,0,odomPose[2]));
-
-  this->parent->SetWorldPose( new_pose );
+   pub_pose.publish(pose_);
 }
 
 GZ_REGISTER_MODEL_PLUGIN(OdomPlugin)

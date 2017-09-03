@@ -25,11 +25,11 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   // Safety check
   if (model->GetJointCount() == 0)
   {
-    ROS_ERROR("[move_wheels]: Invalid joint count, plugin not loaded");
+    ROS_ERROR("[motors]: Invalid joint count, plugin not loaded");
     return;
   } else
   {
-    ROS_INFO("[move_wheels]: Plugin found %d joints on the model", model->GetJointCount());
+    ROS_INFO("[motors]: Plugin found %d joints on the model", model->GetJointCount());
   }
 
   jointList = model->GetJoints();
@@ -38,45 +38,51 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   /*ROS_INFO("The number of links are: %ld", linkList.size());
   */
   for (unsigned i = 0; i < jointList.size(); i++) {
-    ROS_INFO("[move_wheels]: (%d): %s", i, (jointList[i]->GetName()).c_str());
+    ROS_INFO("[motors]: (%d): %s", i, (jointList[i]->GetName()).c_str());
   }
 
 
   // Load ROS - initialize ros
   if (!ros::isInitialized())
   {
-    gzerr << "[move_wheels]: Not loading plugin since ROS hasn't been properly initialized.\n";
+    gzerr << "[motors]: Not loading plugin since ROS hasn't been properly initialized.\n";
     return;
   }
 
   // ros stuff
   this->rosNode = new ros::NodeHandle("");
+  if (rosNode->hasParam("left_offset") && rosNode->hasParam("right_offset"))
+  {
+    rosNode->getParam("/left_offset", left_offset);
+    rosNode->getParam("/right_offset", right_offset);
+    //debug
+    ROS_INFO("[motors]: Left offset %f vs Right offset %f", left_offset, right_offset);
+  }
 
   // subscribing to the ros topics, and calling the callback functions
-  this->lWheels_vel = this->rosNode->subscribe("/lWheels", 10, &MoveWheelsPlugin::left_velocity_callback, this);
-  this->rWheels_vel = this->rosNode->subscribe("/rWheels", 10, &MoveWheelsPlugin::right_velocity_callback, this);
+  this->joints_vels = this->rosNode->subscribe("/joint_velocities", 10, &MoveWheelsPlugin::joints_velocities_callback, this);
 
-
-  ROS_INFO("[move_wheels]: MoveWheels Plugin: Loaded succesfully");
+  ROS_INFO("[motors]: MoveWheels Plugin: Loaded succesfully");
 }
 
-void MoveWheelsPlugin::left_velocity_callback(const std_msgs::Float32ConstPtr &_msg)
+void MoveWheelsPlugin::joints_velocities_callback(const std_msgs::Int16MultiArray::ConstPtr &_msg)
 {
+
   //ROS_INFO("Callback iteration");
-  double vl =(double)(_msg->data);
+  auto vels = (_msg->data);
+  //ROS_INFO("[motors]: Receive joint velocities %d, %d", vels[0], vels[1]);
+
+  // apply the side offsets
+  vels[0] = left_offset*vels[0];
+  vels[1] = right_offset*vels[1];
+
   //ROS_INFO("%f rad/s velocity for left wheels", vl);
   this->jointList[0]->SetParam("fmax", 0, 10000.0);
-  this->jointList[0]->SetParam("vel", 0, vl);
+  this->jointList[0]->SetParam("vel", 0, (double)vels[0]);
 
-}
-
-void MoveWheelsPlugin::right_velocity_callback(const std_msgs::Float32ConstPtr &_msg)
-{
-  //ROS_INFO("Callback iteration");
-  double vr =(double)(_msg->data);
   //ROS_INFO("%f rad/s velocity for right wheels", vr);
   this->jointList[1]->SetParam("fmax", 0, 10000.0);
-  this->jointList[1]->SetParam("vel", 0, vr);
+  this->jointList[1]->SetParam("vel", 0, (double)vels[1]);
 
 }
 

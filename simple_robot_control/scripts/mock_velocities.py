@@ -1,26 +1,35 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import Float32
+
+from std_msgs.msg import Int16MultiArray
+from std_msgs.msg import MultiArrayLayout
+from std_msgs.msg import MultiArrayDimension
 
 def mock_velocoties():
-    pub_left_vel = rospy.Publisher('lWheels', Float32, queue_size=5)
-    pub_right_vel = rospy.Publisher('rWheels', Float32, queue_size=5)
+    pub = rospy.Publisher('joint_velocities', Int16MultiArray, queue_size=5)
 
-    rospy.init_node('mock_velocities', anonymous=True)
+    rospy.init_node('joint_velocities', anonymous=True)
     rate = rospy.Rate(20)
 
+    # compose the multiarray message
+    jointVelocities = Int16MultiArray()
+    myLayout = MultiArrayLayout()
+    myMultiArrayDimension = MultiArrayDimension()
+
+    myMultiArrayDimension.label = "joint_velocities"
+    myMultiArrayDimension.size = 1
+    myMultiArrayDimension.stride = 2
+
+    myLayout.dim = [myMultiArrayDimension]
+    myLayout.data_offset = 0
+    jointVelocities.layout = myLayout
+
     while not rospy.is_shutdown():
-        vl = Float32(-1)
-        vr = Float32(-1)
-        #rospy.loginfo("Publishing mock velocities to topics...")
-        pub_left_vel.publish(vl)
-        pub_right_vel.publish(vr)
+        jointVelocities.data = [-1, 1]
+
+        pub.publish(jointVelocities)
         rate.sleep()
 
-
 if __name__ == '__main__':
-    try:
-        mock_velocoties()
-    except:
-        pass
+    mock_velocoties()

@@ -1,0 +1,3 @@
+ # control the offset of the left and right side
+ left_offset: 1.0
+ right_offset: 1.0

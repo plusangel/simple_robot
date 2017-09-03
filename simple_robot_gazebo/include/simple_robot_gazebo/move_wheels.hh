@@ -8,7 +8,10 @@
 #include "ros/ros.h"
 #include "ros/callback_queue.h"
 #include "ros/subscribe_options.h"
-#include "std_msgs/Float32.h"
+
+#include "std_msgs/MultiArrayLayout.h"
+#include "std_msgs/MultiArrayDimension.h"
+#include "std_msgs/Int16MultiArray.h"
 
 namespace gazebo
 {
@@ -26,13 +29,6 @@ namespace gazebo
     // Called by the world update start event
     public: void OnUpdate(const common::UpdateInfo & /*_info*/);
 
-    // ROS topic callback
-    public: void left_velocity_callback(const std_msgs::Float32ConstPtr &_msg);
-
-    // ROS topic callback
-    public: void right_velocity_callback(const std_msgs::Float32ConstPtr &_msg);
-
-
 
     // Pointer to the model
     private: physics::ModelPtr model;
@@ -44,16 +40,18 @@ namespace gazebo
     private: event::ConnectionPtr updateConnection;
 
 
-
     // ROS NodeHanle
     private: ros::NodeHandle* rosNode;
 
-    // ROS subscriber for the left wheels velocities
-    private: ros::Subscriber lWheels_vel;
+    // ROS subscriber for the joints velocities
+    private: ros::Subscriber joints_vels;
 
-    // ROS subscriber for the right wheels velocities
-    private: ros::Subscriber rWheels_vel;
+    // Callback for the joint velocities
+    private: void joints_velocities_callback(const std_msgs::Int16MultiArray::ConstPtr &_msg);
 
+    // offset between left and right side
+    private: float left_offset;
+    private: float right_offset;
   };
 }
 #endif

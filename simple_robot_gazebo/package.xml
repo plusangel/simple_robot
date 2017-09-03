@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_gazebo</name>
-  <version>0.0.5</version>
+  <version>0.0.6</version>
   <description>The diff_wheeled_robot_gazebo package</description>
 
   <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
@@ -9,6 +9,8 @@
   <license>BSD</license>
 
   <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>gazebo_msgs</build_depend>
   <build_depend>gazebo_plugins</build_depend>

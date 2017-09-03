@@ -16,3 +16,11 @@ First cut of encoders added to the simulation
 0.0.5 simple_robot
 Encoders have their own message type (like in hardware interface) and publish to
 the dedicated topic, as they should.
+
+0.0.6 simple robot
+This update includes the followings:
+- motors listen to joint velocities in an Int16MultiArray
+- description.launch added to easily create model in other launch files
+- motors support offset in sides to simulate real low-quality amplifiers/motors
+- odometry updated to publish pose as well
+- mock_velocities updated to publish joint velocities

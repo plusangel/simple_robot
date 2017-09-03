@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_description</name>
-  <version>0.0.4</version>
+  <version>0.0.6</version>
   <description>The mastering_ros_robot_description_pkg package</description>
 
   <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
