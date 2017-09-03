@@ -27,7 +27,9 @@ Gazebo 7.x
 ## Contributing
 
 ### Members
-
-Artur Gmerek (artur.gmerek@innotecuk.com)
-
+Author:
 Angelos Plastropoulos (angelos.plastropoulos@innotecuk.com)
+
+
+Reviewer:
+Artur Gmerek (artur.gmerek@innotecuk.com)
