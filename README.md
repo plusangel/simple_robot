@@ -42,7 +42,7 @@ In this topic you can find Pose2D messages published, indicating the x,y and the
 of the robot based on the gazebo simulation.
 
 ~/joint_velocities(std_msgs::Int16MultiArray)
-This topic listens to Int16MultiArray messages which are the velocities for
+in his topic, we transmit Int16MultiArray messages, which are the velocities for
 each joint of the robot.
 
 
