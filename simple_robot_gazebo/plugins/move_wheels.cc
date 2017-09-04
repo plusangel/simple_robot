@@ -65,7 +65,7 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   ROS_INFO("[motors]: MoveWheels Plugin: Loaded succesfully");
 }
 
-void MoveWheelsPlugin::joints_velocities_callback(const std_msgs::Int16MultiArray::ConstPtr &_msg)
+void MoveWheelsPlugin::joints_velocities_callback(const std_msgs::Float32MultiArray::ConstPtr &_msg)
 {
 
   //ROS_INFO("Callback iteration");

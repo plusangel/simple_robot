@@ -17,7 +17,7 @@ First cut of encoders added to the simulation
 Encoders have their own message type (like in hardware interface) and publish to
 the dedicated topic, as they should.
 
-0.0.6 simple robot
+0.0.6 simple_robot
 This update includes the followings:
 - motors listen to joint velocities in an Int16MultiArray
 - description.launch added to easily create model in other launch files
@@ -25,8 +25,12 @@ This update includes the followings:
 - odometry updated to publish pose as well
 - mock_velocities updated to publish joint velocities
 
-0.0.7 simple robot
+0.0.7 simple_robot
 This update includes the followings:
 - A normal distribution added to tick counts
 - Resolution added to encoder ticks for the motors
 - A clean xacro with color updates
+
+0.0.8 simple_robot
+In this update, we change the joint_velocities topics message from Int16MultiArray
+to Float32MultiArray 

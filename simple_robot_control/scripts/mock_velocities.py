@@ -2,7 +2,7 @@
 
 import rospy
 
-from std_msgs.msg import Int16MultiArray
+from std_msgs.msg import Float32MultiArray
 from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
@@ -13,7 +13,7 @@ def mock_velocoties():
     rate = rospy.Rate(20)
 
     # compose the multiarray message
-    jointVelocities = Int16MultiArray()
+    jointVelocities = Float32MultiArray()
     myLayout = MultiArrayLayout()
     myMultiArrayDimension = MultiArrayDimension()
 
@@ -26,7 +26,7 @@ def mock_velocoties():
     jointVelocities.layout = myLayout
 
     while not rospy.is_shutdown():
-        jointVelocities.data = [1, 1]
+        jointVelocities.data = [1.0, -1.0]
 
         pub.publish(jointVelocities)
         rate.sleep()

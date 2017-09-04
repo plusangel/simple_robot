@@ -11,7 +11,7 @@
 
 #include "std_msgs/MultiArrayLayout.h"
 #include "std_msgs/MultiArrayDimension.h"
-#include "std_msgs/Int16MultiArray.h"
+#include "std_msgs/Float32MultiArray.h"
 
 namespace gazebo
 {
@@ -50,7 +50,7 @@ namespace gazebo
     ros::Subscriber joints_vels;
 
     // Callback for the joint velocities
-    void joints_velocities_callback(const std_msgs::Int16MultiArray::ConstPtr &_msg);
+    void joints_velocities_callback(const std_msgs::Float32MultiArray::ConstPtr &_msg);
 
     // offset between left and right side
     float left_offset;
