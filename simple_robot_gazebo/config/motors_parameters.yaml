@@ -1,3 +1,10 @@
- # control the offset of the left and right side
- left_offset: 1.0
- right_offset: 1.0
+# control the offset of the left and right side (1.0 is ideal)
+left_offset: 1.0
+right_offset: 1.0
+
+# standard deviation from the real value of the tick (0 is ideal)
+left_stddev: 0.0
+right_stddev: 0.0
+
+# encoders resolution
+resolution: 720

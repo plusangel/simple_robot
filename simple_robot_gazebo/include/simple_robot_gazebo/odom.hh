@@ -19,11 +19,15 @@ namespace gazebo
 {
   class OdomPlugin : public ModelPlugin
   {
-    public: OdomPlugin();
-    public: ~OdomPlugin();
+  public:
+    OdomPlugin();
 
-    public: void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
-    protected: virtual void UpdateChild();
+    ~OdomPlugin();
+
+    void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+
+  protected:
+    virtual void UpdateChild();
 
     private:
       void publish_odometry();

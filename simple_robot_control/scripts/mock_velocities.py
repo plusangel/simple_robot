@@ -26,7 +26,7 @@ def mock_velocoties():
     jointVelocities.layout = myLayout
 
     while not rospy.is_shutdown():
-        jointVelocities.data = [-1, 1]
+        jointVelocities.data = [1, 1]
 
         pub.publish(jointVelocities)
         rate.sleep()

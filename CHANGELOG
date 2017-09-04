@@ -24,3 +24,9 @@ This update includes the followings:
 - motors support offset in sides to simulate real low-quality amplifiers/motors
 - odometry updated to publish pose as well
 - mock_velocities updated to publish joint velocities
+
+0.0.7 simple robot
+This update includes the followings:
+- A normal distribution added to tick counts
+- Resolution added to encoder ticks for the motors
+- A clean xacro with color updates

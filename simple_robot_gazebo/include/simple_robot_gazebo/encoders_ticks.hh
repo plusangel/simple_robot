@@ -13,30 +13,42 @@ namespace gazebo
 {
   class EncodersTicksPlugin : public ModelPlugin
   {
+  public:
     // Constactor
-    public: EncodersTicksPlugin();
+    EncodersTicksPlugin();
 
     // Destructor
-    public: virtual ~EncodersTicksPlugin();
+    virtual ~EncodersTicksPlugin();
 
     //  Load the sensor plugin.
-    public: virtual void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+    virtual void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
 
     // Called by the world update start event
-    public: void OnUpdate(const common::UpdateInfo & /*_info*/);
+    void OnUpdate(const common::UpdateInfo & /*_info*/);
 
+  private:
     // Pointer to the model
-    private: physics::ModelPtr model;
+    physics::ModelPtr model;
 
     // List which holds the innoclimber joints
-    private: physics::Joint_V jointList;
+    physics::Joint_V jointList;
 
     // Pointer to the update event connection
-    private: event::ConnectionPtr updateConnection;
+    event::ConnectionPtr updateConnection;
 
     // ROS NodeHanle
-    private: ros::NodeHandle* rosNode;
-    private: ros::Publisher encoders_pub;
+    ros::NodeHandle* rosNode;
+    ros::Publisher encoders_pub;
+
+    // encoders resolution
+    int encoders_resolution;
+
+    // stddev between left and right side
+    float left_stddev;
+    float right_stddev;
+
+    // normal distribution generator
+    std::default_random_engine generator;
   };
 }
 #endif

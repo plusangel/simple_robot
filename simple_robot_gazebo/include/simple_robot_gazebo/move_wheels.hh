@@ -17,41 +17,44 @@ namespace gazebo
 {
   class MoveWheelsPlugin : public ModelPlugin
   {
+  public:
+
     // Constactor
-    public: MoveWheelsPlugin();
+    MoveWheelsPlugin();
 
     // Destructor
-    public: virtual ~MoveWheelsPlugin();
+    virtual ~MoveWheelsPlugin();
 
     //  Load the sensor plugin.
-    public: virtual void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+    virtual void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
 
     // Called by the world update start event
-    public: void OnUpdate(const common::UpdateInfo & /*_info*/);
+    void OnUpdate(const common::UpdateInfo & /*_info*/);
 
+  private:
 
     // Pointer to the model
-    private: physics::ModelPtr model;
+    physics::ModelPtr model;
 
     // List which holds the innoclimber joints
-    private: physics::Joint_V jointList;
+    physics::Joint_V jointList;
 
     // Pointer to the update event connection
-    private: event::ConnectionPtr updateConnection;
+    event::ConnectionPtr updateConnection;
 
 
     // ROS NodeHanle
-    private: ros::NodeHandle* rosNode;
+    ros::NodeHandle* rosNode;
 
     // ROS subscriber for the joints velocities
-    private: ros::Subscriber joints_vels;
+    ros::Subscriber joints_vels;
 
     // Callback for the joint velocities
-    private: void joints_velocities_callback(const std_msgs::Int16MultiArray::ConstPtr &_msg);
+    void joints_velocities_callback(const std_msgs::Int16MultiArray::ConstPtr &_msg);
 
     // offset between left and right side
-    private: float left_offset;
-    private: float right_offset;
+    float left_offset;
+    float right_offset;
   };
 }
 #endif
