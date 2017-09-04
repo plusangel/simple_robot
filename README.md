@@ -17,15 +17,21 @@ In this file you can set the offset between the left and the right side
 
 ## Instuctions
 
-### Startup
+### Starting up the simulation
 Gazebo simulation:
+```
 roslaunch simple_robot_gazebo diff_wheeled_gazebo.launch
+```
 
 Rviz:
+```
 roslaunch simple_robot_description view_mobile_robot.launch
+```
 
 Send joint velocities to the robot:
+```
 roslaunch simple_robot_control mock_velocities.launch
+```
 
 ### Topics
 
