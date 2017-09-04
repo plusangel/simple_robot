@@ -5,6 +5,9 @@ experiments. It does not use ros_control package so everything is manual.
 You can send joint velocities from your controller framework and get back 
 encoders ticks counts, like in real robot!
 
+At this configuration it support a 2 two wheel differential drive robot but it
+can asily expanded to 4 wheels differential drive robot.
+
 ## Configuration
 
 You can find the configuration yaml file inside the simple_robot_gazebo package. 
@@ -14,12 +17,30 @@ In this file you can set the offset between the left and the right side
 
 ## Instuctions
 
+### Startup
 Gazebo simulation:
 roslaunch simple_robot_gazebo diff_wheeled_gazebo.launch
 
 Rviz:
+roslaunch simple_robot_description view_mobile_robot.launch
 
-Check the model: roslaunch innoclimber_visual view_model.launch
+Send joint velocities to the robot:
+roslaunch simple_robot_control mock_velocities.launch
+
+### Topics
+
+Publish:
+
+~/encoders:
+This topic publishes encoders custom messages. Those messages contains the 
+timestamp and the encoder ticks for each joint.
+
+Listen:
+
+~/joint_velocities:
+This topic listens to Int16MultiArray messages which are the velocities for
+each joint of the robot.
+
 
 
 ## Software Setup
@@ -38,7 +59,6 @@ Gazebo 7.x
 ### Members
 Author:
 Angelos Plastropoulos (angelos.plastropoulos@innotecuk.com)
-
 
 Reviewer:
 Artur Gmerek (artur.gmerek@innotecuk.com)
