@@ -7,7 +7,7 @@ from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
 def mock_velocoties():
-    pub = rospy.Publisher('joint_velocities', Int16MultiArray, queue_size=5)
+    pub = rospy.Publisher('joint_velocities', Float32MultiArray, queue_size=5)
 
     rospy.init_node('joint_velocities', anonymous=True)
     rate = rospy.Rate(20)
@@ -26,7 +26,8 @@ def mock_velocoties():
     jointVelocities.layout = myLayout
 
     while not rospy.is_shutdown():
-        jointVelocities.data = [1.0, -1.0]
+        # first item is left and second is right
+        jointVelocities.data = [1.0, 1.0]
 
         pub.publish(jointVelocities)
         rate.sleep()

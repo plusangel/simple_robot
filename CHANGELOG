@@ -33,4 +33,7 @@ This update includes the followings:
 
 0.0.8 simple_robot
 In this update, we change the joint_velocities topics message from Int16MultiArray
-to Float32MultiArray 
+to Float32MultiArray
+
+0.0.9 simple_robot
+Bugfix the correct side application of the transmitted joint velocities to the robot

@@ -78,11 +78,11 @@ void MoveWheelsPlugin::joints_velocities_callback(const std_msgs::Float32MultiAr
 
   //ROS_INFO("%f rad/s velocity for left wheels", vl);
   this->jointList[0]->SetParam("fmax", 0, 10000.0);
-  this->jointList[0]->SetParam("vel", 0, (double)vels[0]);
+  this->jointList[0]->SetParam("vel", 0, (double)vels[1]);
 
   //ROS_INFO("%f rad/s velocity for right wheels", vr);
   this->jointList[1]->SetParam("fmax", 0, 10000.0);
-  this->jointList[1]->SetParam("vel", 0, (double)vels[1]);
+  this->jointList[1]->SetParam("vel", 0, (double)vels[0]);
 
 }
 

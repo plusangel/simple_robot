@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_control</name>
-  <version>0.0.7</version>
+  <version>0.0.9</version>
   <description>The simple_robot_control package</description>
 
   <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
