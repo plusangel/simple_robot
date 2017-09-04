@@ -29,15 +29,19 @@ roslaunch simple_robot_control mock_velocities.launch
 
 ### Topics
 
-Publish:
-
-~/encoders:
-This topic publishes encoders custom messages. Those messages contains the 
+~/encoders (simple_robot_gazebo::encoders msg):
+In this topic you can find encoders custom messages published. Those messages contains the 
 timestamp and the encoder ticks for each joint.
 
-Listen:
+~/odom (nav_msgs::Odometry)
+In this topic you can find nav_msgs messages published, indicating the odometry
+of the robot based on the gazebo simulation.
 
-~/joint_velocities:
+~/pose (geometry_msgs::Pose2D)
+In this topic you can find Pose2D messages published, indicating the x,y and theta
+of the robot based on the gazebo simulation.
+
+~/joint_velocities(std_msgs::Int16MultiArray)
 This topic listens to Int16MultiArray messages which are the velocities for
 each joint of the robot.
 
