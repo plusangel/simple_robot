@@ -27,7 +27,7 @@ def mock_velocoties():
 
     while not rospy.is_shutdown():
         # first item is left and second is right
-        jointVelocities.data = [1.0, 1.0]
+        jointVelocities.data = [-1.0, 0.0]
 
         pub.publish(jointVelocities)
         rate.sleep()
