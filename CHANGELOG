@@ -43,3 +43,7 @@ First cut of the simple control framework added
 
 0.0.11 simple_robot
 The control framework debugged and introduced as part of the simple_robot_control
+
+0.0.12 simple_robot
+The twist_to_motors manual controller updated to support the new joint_velocities
+approach.

@@ -2,9 +2,12 @@
 
 import rospy
 from geometry_msgs.msg import Twist
-from std_msgs.msg import Float32
 
-class controller_node:
+from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import MultiArrayLayout
+from std_msgs.msg import MultiArrayDimension
+
+class Twist_To_Motors:
 
     def __init__(self):
         self.linearVelocity = 0.0
@@ -12,6 +15,20 @@ class controller_node:
 
 
     def publish(self):
+
+        # compose the multiarray message
+        jointVelocities = Float32MultiArray()
+        myLayout = MultiArrayLayout()
+        myMultiArrayDimension = MultiArrayDimension()
+
+        myMultiArrayDimension.label = "joint_velocities"
+        myMultiArrayDimension.size = 1
+        myMultiArrayDimension.stride = 2
+
+        myLayout.dim = [myMultiArrayDimension]
+        myLayout.data_offset = 0
+        jointVelocities.layout = myLayout
+
         if rospy.get_time() - self.lastTwistTime < self.timeout:
 
             self.right = 1.0 * self.linearVelocity + self.angularVelocity * self.baseWidth / 2
@@ -19,11 +36,14 @@ class controller_node:
 
             rospy.loginfo("Sending velocities to wheels... vl:{0}, vr:{1}".format(self.left, self.right))
 
-            self.leftPub.publish(self.left)
-            self.rightPub.publish(self.right)
+            # first item is left and second is right
+            jointVelocities.data = [self.left, self.right]
+            self.joint_velocities_Pub.publish(jointVelocities)
         else:
-            self.leftPub.publish(0)
-            self.rightPub.publish(0)
+            # first item is left and second is right
+            jointVelocities.data = [0.0, 0.0]
+            self.joint_velocities_Pub.publish(jointVelocities)
+
 
 
     def twistCallback(self, twist):
@@ -37,11 +57,10 @@ class controller_node:
     def main(self):
 
         # Create the publishers
-        self.leftPub = rospy.Publisher('lWheels', Float32, queue_size=10)
-        self.rightPub = rospy.Publisher('rWheels', Float32, queue_size=10)
+        self.joint_velocities_Pub = rospy.Publisher('joint_velocities', Float32MultiArray, queue_size=10)
 
         # Create the coresponding node
-        rospy.init_node('diff_drive_controller')
+        rospy.init_node('twist_to_motors')
         self.nodeName = rospy.get_name()
 
         rospy.loginfo("{0} started".format(self.nodeName))
@@ -54,8 +73,7 @@ class controller_node:
         self.rate = float(rospy.get_param('~rate', 20.0))
         self.timeout = float(rospy.get_param('~timeout', 0.2))
 
-
-        # Loop now!
+        # Loop now
         rate = rospy.Rate(self.rate)
 
         self.lastTwistTime = rospy.get_time()
@@ -63,10 +81,9 @@ class controller_node:
             self.publish()
             rate.sleep()
 
-
 if __name__ == '__main__':
     try:
-        node = controller_node()
+        node = Twist_To_Motors()
         node.main()
     except rospy.ROSInterruptException:
         pass
