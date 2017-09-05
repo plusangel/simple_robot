@@ -28,9 +28,15 @@ Rviz:
 roslaunch simple_robot_description view_mobile_robot.launch
 ```
 
-Manual control: Send joint velocities to the robot:
+Manual control: Send joint velocities to the robot
 ```
-roslaunch simple_robot_control mock_velocities.launch
+roslaunch simple_robot_control test_velocities.launch
+```
+
+Manual control: Use keyboard to control the robot
+```
+roslaunch simple_robot_control keyboard_teleop.launch
+roslaunch simple_robot_control twist_to_motors.launch
 ```
 
 Autonomous control: Use the position controller to move the robot
