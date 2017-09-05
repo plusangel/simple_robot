@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_control</name>
-  <version>0.0.9</version>
+  <version>0.0.11</version>
   <description>The simple_robot_control package</description>
 
   <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
+  <maintainer email="artur.gmerek@innotecuk.com">Artur Gmerek</maintainer>
 
   <license>BSD</license>
 
   <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>
+  <author email="artur.gmerek@innotecuk.com">Artur Gmerek</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
@@ -19,9 +21,7 @@
   <run_depend>std_msgs</run_depend>
 
 
-  <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <!-- Other tools can request additional information be placed here -->
-
   </export>
+
 </package>

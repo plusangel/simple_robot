@@ -39,4 +39,7 @@ to Float32MultiArray
 Bugfix the correct side application of the transmitted joint velocities to the robot
 
 0.0.10 simple_robot
-First cut of the simple control framework added 
+First cut of the simple control framework added
+
+0.0.11 simple_robot
+The control framework debugged and introduced as part of the simple_robot_control

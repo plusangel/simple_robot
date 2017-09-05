@@ -88,7 +88,7 @@ void EncodersTicksPlugin::OnUpdate(const common::UpdateInfo & /*_info*/)
   encoder_left = distributionLeft(generator);
 
   // debug
-  ROS_INFO("[encoders]: Left %f at %d", encoder_left, milliTime);
+  //ROS_INFO("[encoders]: Left %f at %d", encoder_left, milliTime);
 
   // get the right joint angle
   math::Angle right_angle = (this->jointList[0])->GetAngle(0);
@@ -101,7 +101,7 @@ void EncodersTicksPlugin::OnUpdate(const common::UpdateInfo & /*_info*/)
   encoder_right = distributionRight(generator);
 
   // debug
-  ROS_INFO("[encoders]: Right %f at %d", encoder_right, milliTime);
+  //ROS_INFO("[encoders]: Right %f at %d", encoder_right, milliTime);
 
   // publish
   simple_robot_gazebo::encoders msg;
