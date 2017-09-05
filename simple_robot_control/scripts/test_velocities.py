@@ -6,7 +6,7 @@ from std_msgs.msg import Float32MultiArray
 from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
-def mock_velocoties():
+def test_velocoties():
     pub = rospy.Publisher('joint_velocities', Float32MultiArray, queue_size=5)
 
     rospy.init_node('joint_velocities', anonymous=True)
@@ -33,4 +33,7 @@ def mock_velocoties():
         rate.sleep()
 
 if __name__ == '__main__':
-    mock_velocoties()
+    try:
+        test_velocoties()
+    except rospy.ROSInterruptException:
+        pass
