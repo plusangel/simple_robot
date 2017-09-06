@@ -48,6 +48,8 @@ target_link_libraries(moveWheels_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 add_library(encodersTicks_plugin plugins/encoders_ticks.cc)
 target_link_libraries(encodersTicks_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+add_dependencies(encodersTicks_plugin simple_robot_gazebo_generate_messages_cpp)
 
 add_library(odom_plugin plugins/odom.cc)
 target_link_libraries(odom_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+add_dependencies(odom_plugin simple_robot_gazebo_generate_messages_cpp)

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>simple_robot_description</name>
+  <name>simple_robot_description_2wheels</name>
   <version>0.0.6</version>
   <description>The mastering_ros_robot_description_pkg package</description>
 

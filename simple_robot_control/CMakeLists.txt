@@ -50,6 +50,8 @@ include_directories(
 
 add_executable(controller src/controller.cpp)
 target_link_libraries(controller ${catkin_LIBRARIES})
+add_dependencies(controller simple_robot_control_generate_messages_cpp)
 
 add_executable(waypoints_generator src/waypoints_generator.cpp)
 target_link_libraries(waypoints_generator ${catkin_LIBRARIES})
+add_dependencies(waypoints_generator simple_robot_control_generate_messages_cpp)
