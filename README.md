@@ -19,6 +19,7 @@ In this file you can set the offset between the left and the right side
 
 ### Starting up the simulation
 Gazebo simulation
+
 * For 2wheels model:
 
 ```
@@ -29,6 +30,7 @@ roslaunch simple_robot_gazebo robot_2wheels.launch
 ```
 roslaunch simple_robot_gazebo robot_4wheels.launch
 ```
+
 
 
 Rviz
@@ -44,10 +46,12 @@ roslaunch simple_robot_description_2wheels view_mobile_robot.launch
 roslaunch simple_robot_description_4wheels view_mobile_robot.launch
 ```
 
+
 Manual control: Send joint velocities to the robot
 ```
 roslaunch simple_robot_control test_velocities.launch
 ```
+
 
 Manual control: Use keyboard to control the robot
 ```
