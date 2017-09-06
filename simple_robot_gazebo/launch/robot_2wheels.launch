@@ -18,7 +18,7 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  <include file="$(find simple_robot_description)/launch/description.launch">
+  <include file="$(find simple_robot_description_2wheels)/launch/description.launch">
   </include>
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->

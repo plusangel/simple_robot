@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot name="differential_wheeled_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:include filename="$(find simple_robot_description)/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="$(find simple_robot_description_2wheels)/urdf/wheel.urdf.xacro" />
 
   <!-- PROPERTY LIST -->
   <!--All units in m-kg-s-radians unit system -->
@@ -178,6 +178,6 @@
 
 
       <!-- Bring in simulation data for Gazebo. -->
-      <xacro:include filename="$(find simple_robot_description)/urdf/diff_wheeled_robot.gazebo" />
+      <xacro:include filename="$(find simple_robot_description_2wheels)/urdf/diff_wheeled_robot.gazebo" />
 
     </robot>

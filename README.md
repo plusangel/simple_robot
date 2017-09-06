@@ -18,14 +18,25 @@ In this file you can set the offset between the left and the right side
 ## Instuctions
 
 ### Starting up the simulation
-Gazebo simulation:
+Gazebo simulation
+-For 2wheels model:
 ```
-roslaunch simple_robot_gazebo diff_wheeled_gazebo.launch
+roslaunch simple_robot_gazebo robot_2wheels.launch
+```
+-For 4wheels model:
+```
+roslaunch simple_robot_gazebo robot_4wheels.launch
 ```
 
-Rviz:
+
+Rviz
+-For 2wheels model:
 ```
-roslaunch simple_robot_description view_mobile_robot.launch
+roslaunch simple_robot_description_2wheels view_mobile_robot.launch
+```
+-For 4wheels model:
+```
+roslaunch simple_robot_description_4wheels view_mobile_robot.launch
 ```
 
 Manual control: Send joint velocities to the robot

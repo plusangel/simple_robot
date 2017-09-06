@@ -55,3 +55,6 @@ Odom gazebo plugin refactored to support 4-wheels drive
 In this update we introduced the following:
 - The problem with the custom messages included in the build before created is fixed.
 - Added a new configuration for a 4wheels robot
+
+0.2.1 simple_robot
+In this update we have further tidied up the 2wheels and 4wheels models
