@@ -47,3 +47,6 @@ The control framework debugged and introduced as part of the simple_robot_contro
 0.0.12 simple_robot
 The twist_to_motors manual controller updated to support the new joint_velocities
 approach.
+
+0.0.13 simple_robot
+Odom gazebo plugin refactored to support 4-wheels drive 

@@ -31,11 +31,11 @@ void OdomPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     ROS_ERROR("[odom]: Plugin requires a Model as its parent");
   }
 
-  this->leftJointName = (_sdf->GetElement("leftJoint")->Get<std::string>());
-  ROS_INFO ("[odom]: leftJointName: %s", this->leftJointName.c_str());
+  this->frontLeftJointName = (_sdf->GetElement("frontLeftJoint")->Get<std::string>());
+  ROS_INFO ("[odom]: frontLeftJointName: %s", this->frontLeftJointName.c_str());
 
-  this->rightJointName = (_sdf->GetElement("rightJoint")->Get<std::string>());
-  ROS_INFO ("[odom]: rightJointName: %s", this->rightJointName.c_str());
+  this->frontRightJointName = (_sdf->GetElement("frontRightJoint")->Get<std::string>());
+  ROS_INFO ("[odom]: frontRightJointName: %s", this->frontRightJointName.c_str());
 
   this->wheelSeparation = atof((_sdf->GetElement("wheelSeparation")->Get<std::string>()).c_str());
   ROS_INFO ("[odom]: wheelSeparation: %f", this->wheelSeparation);
@@ -45,8 +45,8 @@ void OdomPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 
   this->robotNamespace = "";
 
-  joints[LEFT] = this->parent->GetJoint(leftJointName);
-  joints[RIGHT] = this->parent->GetJoint(rightJointName);
+  joints[LEFT] = this->parent->GetJoint(frontLeftJointName);
+  joints[RIGHT] = this->parent->GetJoint(frontRightJointName);
 
   // ROS stuff
   int argc = 0;

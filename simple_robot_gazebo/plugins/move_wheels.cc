@@ -6,11 +6,9 @@ MoveWheelsPlugin::MoveWheelsPlugin() : ModelPlugin()
 {
 }
 
-
 MoveWheelsPlugin::~MoveWheelsPlugin()
 {
 }
-
 
 void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 {
@@ -27,16 +25,12 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   {
     ROS_ERROR("[motors]: Invalid joint count, plugin not loaded");
     return;
-  } else
-  {
+  } else {
     ROS_INFO("[motors]: Plugin found %d joints on the model", model->GetJointCount());
   }
 
   jointList = model->GetJoints();
 
-  // Debuging logging
-  /*ROS_INFO("The number of links are: %ld", linkList.size());
-  */
   for (unsigned i = 0; i < jointList.size(); i++) {
     ROS_INFO("[motors]: (%d): %s", i, (jointList[i]->GetName()).c_str());
   }

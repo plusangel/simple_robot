@@ -43,8 +43,8 @@ namespace gazebo
       physics::JointPtr joints[2];
       physics::PhysicsEnginePtr physicsEngine;
 
-      std::string leftJointName;
-      std::string rightJointName;
+      std::string frontLeftJointName;
+      std::string frontRightJointName;
       std::string robotNamespace;
 
       double wheelSeparation;
