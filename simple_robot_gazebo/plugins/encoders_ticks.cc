@@ -53,14 +53,17 @@ void EncodersTicksPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   // ros stuff
   this->rosNode = new ros::NodeHandle("");
 
-  if (rosNode->hasParam("left_stddev") && rosNode->hasParam("right_stddev") && rosNode->hasParam("resolution"))
+  if (rosNode->hasParam("left_stddev") && rosNode->hasParam("right_stddev")
+    && rosNode->hasParam("resolution") && rosNode->hasParam("num_of_wheels"))
   {
     rosNode->getParam("/left_stddev", left_stddev);
     rosNode->getParam("/right_stddev", right_stddev);
     rosNode->getParam("/resolution", encoders_resolution);
+    rosNode->getParam("/num_of_wheels", num_of_wheels);
 
     //debug
-    ROS_INFO("[encoders]: Left stddev %f vs Right stddev %f with resolution %d", left_stddev, right_stddev, encoders_resolution);
+    ROS_INFO("[encoders]: %dwheels drive - Left stddev %f vs Right stddev %f with resolution %d", num_of_wheels,
+      left_stddev, right_stddev, encoders_resolution);
   }
 
   encoders_pub = rosNode->advertise<simple_robot_gazebo::encoders>("encoders", 1);

@@ -43,6 +43,9 @@ namespace gazebo
     // encoders resolution
     int encoders_resolution;
 
+    // number of wheels
+    int num_of_wheels;
+    
     // stddev between left and right side
     float left_stddev;
     float right_stddev;
