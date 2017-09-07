@@ -54,8 +54,6 @@ void OdomPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   ros::init(argc, argv, "odom_plugin", ros::init_options::NoSigintHandler | ros::init_options::AnonymousName);
   rosnode_ = new ros::NodeHandle(this->robotNamespace);
 
-  ROS_INFO("[odom]: starting odom plugin in ns: %s", this->robotNamespace.c_str());
-
   tf_prefix_ = tf::getPrefixParam(*rosnode_);
   transform_broadcaster_ = new tf::TransformBroadcaster();
 
