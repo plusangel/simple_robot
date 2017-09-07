@@ -1,3 +1,6 @@
+# 2wheels of 4wheels drive
+num_of_wheels: 4
+
 # control the offset of the left and right side (1.0 is ideal)
 left_offset: 1.0
 right_offset: 1.0

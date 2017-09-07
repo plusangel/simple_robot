@@ -55,6 +55,9 @@ namespace gazebo
     // offset between left and right side
     float left_offset;
     float right_offset;
+
+    // number of wheels
+    int num_of_wheels;
   };
 }
 #endif

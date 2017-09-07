@@ -1,7 +1,0 @@
-<launch>
-
-  <node pkg="simple_robot_control" type="twist_to_motors.py" name="twist_to_motors" output="screen" >
-    <rosparam file="$(find simple_robot_control)/config/diff_drive_parameters.yaml" command="load" />
-  </node>
-
-</launch>

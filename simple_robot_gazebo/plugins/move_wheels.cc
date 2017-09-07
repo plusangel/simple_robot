@@ -45,12 +45,13 @@ void MoveWheelsPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 
   // ros stuff
   this->rosNode = new ros::NodeHandle("");
-  if (rosNode->hasParam("left_offset") && rosNode->hasParam("right_offset"))
+  if (rosNode->hasParam("left_offset") && rosNode->hasParam("right_offset") && rosNode->hasParam("num_of_wheels"))
   {
     rosNode->getParam("/left_offset", left_offset);
     rosNode->getParam("/right_offset", right_offset);
+    rosNode->getParam("/num_of_wheels", num_of_wheels);
     //debug
-    ROS_INFO("[motors]: Left offset %f vs Right offset %f", left_offset, right_offset);
+    ROS_INFO("[motors]: %dWheels drive - Left offset %f vs Right offset %f", num_of_wheels, left_offset, right_offset);
   }
 
   // subscribing to the ros topics, and calling the callback functions
@@ -70,13 +71,46 @@ void MoveWheelsPlugin::joints_velocities_callback(const std_msgs::Float32MultiAr
   vels[0] = left_offset*vels[0];
   vels[1] = right_offset*vels[1];
 
-  //ROS_INFO("%f rad/s velocity for left wheels", vl);
-  this->jointList[0]->SetParam("fmax", 0, 10000.0);
-  this->jointList[0]->SetParam("vel", 0, (double)vels[1]);
+  if (num_of_wheels == 2) {
+    // apply the side offsets
+    vels[1] = left_offset*vels[1];
+    vels[0] = right_offset*vels[0];
 
-  //ROS_INFO("%f rad/s velocity for right wheels", vr);
-  this->jointList[1]->SetParam("fmax", 0, 10000.0);
-  this->jointList[1]->SetParam("vel", 0, (double)vels[0]);
+    //ROS_INFO("%f rad/s velocity for left wheels", vl);
+    this->jointList[0]->SetParam("fmax", 0, 10000.0);
+    this->jointList[0]->SetParam("vel", 0, (double)vels[1]);
+
+    //ROS_INFO("%f rad/s velocity for right wheels", vr);
+    this->jointList[1]->SetParam("fmax", 0, 10000.0);
+    this->jointList[1]->SetParam("vel", 0, (double)vels[0]);
+  } else if (num_of_wheels == 4) {
+    // apply the side offsets
+    vels[0] = left_offset*vels[0];
+    vels[2] = left_offset*vels[2];
+
+    vels[1] = right_offset*vels[1];
+    vels[3] = right_offset*vels[3];
+
+    //ROS_INFO("%f rad/s velocity for front left wheels", vels[0]);
+    this->jointList[3]->SetParam("fmax", 0, 10000.0);
+    this->jointList[3]->SetParam("vel", 0, (double)vels[0]);
+
+    //ROS_INFO("%f rad/s velocity for front right wheels", vels[1]);
+    this->jointList[2]->SetParam("fmax", 0, 10000.0);
+    this->jointList[2]->SetParam("vel", 0, (double)vels[1]);
+
+    //ROS_INFO("%f rad/s velocity for rear left wheels", vels[2]);
+    this->jointList[1]->SetParam("fmax", 0, 10000.0);
+    this->jointList[1]->SetParam("vel", 0, (double)vels[2]);
+
+    //ROS_INFO("%f rad/s velocity for rear right wheels", vels[3]);
+    this->jointList[0]->SetParam("fmax", 0, 10000.0);
+    this->jointList[0]->SetParam("vel", 0, (double)vels[3]);
+  } else {
+    ROS_ERROR("[motors]: Undefined number of wheels");
+  }
+
+
 
 }
 

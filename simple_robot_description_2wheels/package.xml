@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_description_2wheels</name>
-  <version>0.2.1</version>
+  <version>0.2.3</version>
   <description>The mastering_ros_robot_description_pkg package</description>
 
   <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>

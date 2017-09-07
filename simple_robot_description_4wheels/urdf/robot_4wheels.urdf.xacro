@@ -93,7 +93,7 @@
       <material>Gazebo/Red</material>
     </gazebo>
 
-    <joint name="${prefix}_wheel" type="continuous">
+    <joint name="${prefix}_joint" type="continuous">
       <parent link="chassis_link"/>
       <child link="${prefix}_wheel_link" />
       <xacro:insert_block name="joint_pose" />

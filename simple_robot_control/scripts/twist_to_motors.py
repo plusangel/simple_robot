@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import rospy
+import sys
+
 from geometry_msgs.msg import Twist
 
 from std_msgs.msg import Float32MultiArray
@@ -9,13 +11,14 @@ from std_msgs.msg import MultiArrayDimension
 
 class Twist_To_Motors:
 
-    def __init__(self):
+    def __init__(self, numOfWheels):
         self.linearVelocity = 0.0
         self.angularVelocity = 0.0
 
+        # number of wheels
+        self.numOfWheels = numOfWheels
 
     def publish(self):
-
         # compose the multiarray message
         jointVelocities = Float32MultiArray()
         myLayout = MultiArrayLayout()
@@ -23,7 +26,7 @@ class Twist_To_Motors:
 
         myMultiArrayDimension.label = "joint_velocities"
         myMultiArrayDimension.size = 1
-        myMultiArrayDimension.stride = 2
+        myMultiArrayDimension.stride = self.numOfWheels
 
         myLayout.dim = [myMultiArrayDimension]
         myLayout.data_offset = 0
@@ -36,13 +39,19 @@ class Twist_To_Motors:
 
             rospy.loginfo("Sending velocities to wheels... vl:{0}, vr:{1}".format(self.left, self.right))
 
-            # first item is left and second is right
-            jointVelocities.data = [self.left, self.right]
-            self.joint_velocities_Pub.publish(jointVelocities)
+            if self.numOfWheels == 2:
+                # first item is left and second is right
+                jointVelocities.data = [self.left, self.right]
+            elif self.numOfWheels == 4:
+                jointVelocities.data = [self.left, self.right, self.left, self.right]
         else:
-            # first item is left and second is right
-            jointVelocities.data = [0.0, 0.0]
-            self.joint_velocities_Pub.publish(jointVelocities)
+            if self.numOfWheels == 2:
+                jointVelocities.data = [0.0, 0.0]
+                # first item is left and second is right
+            elif self.numOfWheels == 4:
+                jointVelocities.data = [0.0, 0.0, 0.0, 0.0]
+
+        self.joint_velocities_Pub.publish(jointVelocities)
 
 
 
@@ -82,8 +91,9 @@ class Twist_To_Motors:
             rate.sleep()
 
 if __name__ == '__main__':
+    numOfWheels = int(sys.argv[1])
     try:
-        node = Twist_To_Motors()
+        node = Twist_To_Motors(numOfWheels)
         node.main()
     except rospy.ROSInterruptException:
         pass
