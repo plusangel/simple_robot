@@ -64,3 +64,7 @@ In this update we introduce meshes in gazebo models instead of shape
 
 0.2.3 simple_robot
 In this update we upgrated the move_wheels plugin to support 2wheels and 4wheels
+
+0.2.4 simple_robot
+In this update we completed the upgrade of the encoders plugin to support 4 wheels
+and we increase the friction coefficients of the wheels to avoid slipage
