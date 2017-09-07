@@ -58,3 +58,6 @@ In this update we introduced the following:
 
 0.2.1 simple_robot
 In this update we have further tidied up the 2wheels and 4wheels models
+
+0.2.2 simple_robot
+In this update we introduce meshes in gazebo models instead of shape
