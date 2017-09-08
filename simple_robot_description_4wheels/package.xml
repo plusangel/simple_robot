@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_description_4wheels</name>
-  <version>0.2.4</version>
+  <version>0.2.5</version>
   <description>The camera_description package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->

@@ -17,7 +17,7 @@ void poseCall(const geometry_msgs::Pose2D::ConstPtr& msg)
   curPose.x=msg->x;
   curPose.y=msg->y;
   curPose.theta=msg->theta;
-  ROS_INFO("[controller]: robot location: [%4.2f %4.2f %4.2f]", msg->x, msg->y, msg->theta);
+  //ROS_INFO("[controller]: robot location: [%4.2f %4.2f %4.2f]", msg->x, msg->y, msg->theta);
 }
 
 int main(int argc, char **argv)
@@ -26,12 +26,15 @@ int main(int argc, char **argv)
   float eps1=0.5; //position deadzone
   float eps2=0.4; //rotataion deadzone
   float eps3=0.05;
-  float K1=3; //position gain
-  float K2=1; //rotation gain
+  float K1=0.6; //position gain
+  float K2=1.5; //rotation gain
 
   float granica_rot=eps2;
 
   int point=0;//point number
+  int num_of_wheels = std::stoi(argv[1]);
+
+  ROS_INFO(">>>> %d", std::stoi(argv[1]));
 
   ros::init(argc, argv, "controller");
   ros::NodeHandle n;
@@ -127,15 +130,23 @@ int main(int argc, char **argv)
     std_msgs::Float32MultiArray Pos;
     Pos.layout.dim.push_back(std_msgs::MultiArrayDimension());
     Pos.layout.dim[0].label="poss";
-    Pos.layout.dim[0].size=4;
-    Pos.layout.dim[0].stride=1;
+    Pos.layout.dim[0].size=1;
+    Pos.layout.dim[0].stride=num_of_wheels;
 
     Pos.data.clear();
-    Pos.data.push_back(vRR);
-    Pos.data.push_back(vLL);
+
+    if (num_of_wheels == 2) {
+      Pos.data.push_back(vRR);
+      Pos.data.push_back(vLL);
+    } else if (num_of_wheels == 4) {
+      Pos.data.push_back(vLL);
+      Pos.data.push_back(vRR);
+      Pos.data.push_back(vLL);
+      Pos.data.push_back(vRR);
+    }
 
     chatter_pub.publish(Pos);
-    ROS_INFO("[controller]: Count [%d] Control variables: [%4.2f, %4.2f]",count,vRR,vLL);
+    ROS_INFO("[controller]: Control variables: [%4.2f, %4.2f, %4.2f, %4.2f]", vLL, vRR, vLL, vRR);
 
     ros::spinOnce();
     loop_rate.sleep();

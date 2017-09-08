@@ -20,11 +20,31 @@
   <xacro:property name="wheel_radius" value="0.098" />
   <xacro:property name="wheel_width" value="0.040" />
 
-  <link name="base_link"></link>
+  <!-- BASE-FOOTPRINT -->
+  <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin -->
+  <link name="base_footprint">
+    <inertial>
+      <mass value="0.0001" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+        iyy="0.0001" iyz="0.0"
+        izz="0.0001" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001" />
+        </geometry>
+      </visual>
+    </link>
+
+    <gazebo reference="base_footprint">
+      <turnGravityOff>false</turnGravityOff>
+    </gazebo>
 
   <joint name="base_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="base_link"/>
+    <parent link="base_footprint"/>
     <child link="chassis_link" />
   </joint>
 
@@ -90,8 +110,8 @@
     </link>
 
     <gazebo reference="${prefix}_wheel_link">
-      <mu1>100</mu1>
-      <mu2>100</mu2>
+      <!--<mu1>10</mu1>
+      <mu2>10</mu2>-->
       <material>Gazebo/Red</material>
     </gazebo>
 

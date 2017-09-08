@@ -1,11 +1,12 @@
 <launch>
   <!-- innoclimber configuration to view. See innoclimber_description for details. -->
   <!--<arg name="config" default="base"/>-->
+  <arg name="model" />
 
-  <include file="$(find simple_robot_description_4wheels)/launch/description.launch">
-  </include>
+  <param name="robot_description" command="$(find xacro)/xacro $(find simple_robot_description_4wheels)/urdf/robot_4wheels.urdf.xacro --inorder" />
 
   <param name="use_gui" value="true"/>
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find simple_robot_description_4wheels)/rviz_config/model_view.rviz"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find simple_robot_description_4wheels)/rviz_config/model_view.rviz" required="true" />
 </launch>

@@ -63,7 +63,27 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        base_link:
+        chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_right_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_right_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -77,7 +97,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: base_footprint
     Frame Rate: 30
   Name: root
   Tools:

@@ -2,27 +2,25 @@
 #include "simple_robot_control/reference.h"
 
 //This matrix contains points in a format (x, y, th, d)
-float points[5][4]=
+float points[3][4]=
 {
-	{10,15,0,1},
-	{0,5,0,1},
-	{2,8,0.3,1},
-	{3,3,0.3,1},
-	{0,10,0,100}
+	{4,6,0,1},
+	{4,1,0,1},
+	{0,0,0,1}
 };
 
 bool next_point(simple_robot_control::reference::Request &req, simple_robot_control::reference::Response &res)
 {
-	if(req.a<5){
+	if(req.a<3){
 		res.x=points[req.a][0];
 		res.y=points[req.a][1];
 		res.th=points[req.a][2];
 		res.d=points[req.a][3];
 	} else {
-		res.x=points[4][0];
-		res.y=points[4][1];
-		res.th=points[4][2];
-		res.d=points[4][3];
+		res.x=points[2][0];
+		res.y=points[2][1];
+		res.th=points[2][2];
+		res.d=points[2][3];
 	}
 
 	ROS_INFO("[point_generator]: request: a=%ld", req.a);
