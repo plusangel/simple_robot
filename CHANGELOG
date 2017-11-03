@@ -71,4 +71,7 @@ and we increase the friction coefficients of the wheels to avoid slipage
 
 0.2.5 simple_robot
 In this update we upgraded the simple controller to support 2 and 4 wheels. Additionally,
-we debugged the 4wheels robot (base_footprint)  
+we debugged the 4wheels robot (base_footprint)
+
+0.2.6 simple_robot
+Laser scanner added to the 2-wheels robot and a labyrinth simple world created

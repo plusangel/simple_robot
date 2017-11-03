@@ -1,0 +1,51 @@
+<!--custom landscape for obstacle avoidance testign-->
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!--<include>
+      <uri>model://grey_wall</uri>
+      <name>grey_wall_front1</name>
+      <pose>5.0 0 0.0 0 0 1.57</pose>
+    </include>-->
+    <include> second wall
+      <uri>model://grey_wall</uri>
+      <name>grey_wall_front2</name>
+      <pose>5.0 0.0 -1.0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>model://grey_wall</uri>
+      <name>grey_wall_left</name>
+      <pose>1.1 3.7 -1.0 0 0.0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://grey_wall</uri>
+      <name>grey_wall_left</name>
+      <pose>-6.4 3.7 -1.0 0 0.0 0.0</pose>
+    </include>
+
+    <include>
+      <uri>model://grey_wall</uri>
+      <name>grey_wall_right</name>
+      <pose>-2.8 -3.7 -1.0 0 0.0 1.57</pose>
+    </include>
+    <include>
+      <uri>model://grey_wall</uri>
+      <name>grey_wall_right</name>
+      <pose>1.1 -3.7 -1.0 0 0.0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://grey_wall</uri>
+      <name>grey_wall_right</name>
+      <pose>-6.4 -1.7 -1.0 0 0.0 0.0</pose>
+    </include>
+
+  </world>
+</sdf>
