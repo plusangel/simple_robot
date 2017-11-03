@@ -75,3 +75,6 @@ we debugged the 4wheels robot (base_footprint)
 
 0.2.6 simple_robot
 Laser scanner added to the 2-wheels robot and a labyrinth simple world created
+
+0.2.7 simple_robot
+Simple mapping package added
