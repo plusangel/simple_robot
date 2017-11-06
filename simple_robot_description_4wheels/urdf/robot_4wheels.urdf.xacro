@@ -83,9 +83,9 @@
   <!-- Start of Wheels
   -->
 
-  <xacro:macro name="wheel" params="prefix *joint_pose">
+  <xacro:macro name="wheel" params="prefix trans_x trans_y trans_z">
 
-  <link name="${prefix}_wheel_link">
+  <link name="${prefix}_wheel">
     <visual>
       <origin xyz="0 0 0" rpy="${M_PI/2} 0 0"/>
       <geometry>
@@ -109,7 +109,7 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_wheel_link">
+    <gazebo reference="${prefix}_wheel">
       <!--<mu1>10</mu1>
       <mu2>10</mu2>-->
       <material>Gazebo/Red</material>
@@ -117,29 +117,49 @@
 
     <joint name="${prefix}_joint" type="continuous">
       <parent link="chassis_link"/>
-      <child link="${prefix}_wheel_link" />
-      <xacro:insert_block name="joint_pose" />
+      <child link="${prefix}_wheel" />
+      <origin xyz="${trans_x} ${trans_y} ${trans_z}" rpy="0 0 0" />
       <axis xyz="0 1 0" />
     </joint>
 
   </xacro:macro>
 
-  <xacro:wheel prefix="front_left">
-    <origin xyz="${wheel_horizontal_separation} ${wheel_vertical_separation+wheel_width/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:wheel>
-  <xacro:wheel prefix="front_right">
-    <origin xyz="${wheel_horizontal_separation} ${-wheel_vertical_separation-wheel_width/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:wheel>
-  <xacro:wheel prefix="rear_left">
-    <origin xyz="${-wheel_horizontal_separation} ${wheel_vertical_separation+wheel_width/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:wheel>
-  <xacro:wheel prefix="rear_right">
-    <origin xyz="${-wheel_horizontal_separation} ${-wheel_vertical_separation-wheel_width/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:wheel>
-
-
+  <xacro:wheel prefix="front_left" trans_x="${wheel_horizontal_separation}" trans_y="${wheel_vertical_separation+wheel_width/2}" trans_z="${wheel_vertical_offset}"/>
+  <xacro:wheel prefix="front_right" trans_x="${wheel_horizontal_separation}" trans_y="${-wheel_vertical_separation-wheel_width/2}" trans_z="${wheel_vertical_offset}"/>
+  <xacro:wheel prefix="rear_left" trans_x="${-wheel_horizontal_separation}" trans_y="${wheel_vertical_separation+wheel_width/2}" trans_z="${wheel_vertical_offset}"/>
+  <xacro:wheel prefix="rear_right" trans_x="${-wheel_horizontal_separation}" trans_y="${-wheel_vertical_separation-wheel_width/2}" trans_z="${wheel_vertical_offset}"/>
+    
   <!-- End of Wheels
   -->
+
+  <joint name="hokuyo_joint" type="fixed">
+    <origin xyz="0.262 0 0.1" rpy="0 0 0"/>
+    <parent link="chassis_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+  <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+         <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://simple_robot_description_2wheels/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
 
 
   <!-- Bring in simulation data for Gazebo. -->

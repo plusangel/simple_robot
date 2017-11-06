@@ -16,6 +16,7 @@
     <arg name="paused" value="$(arg paused)"/>
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
+    <arg name="world_name" value="$(find simple_robot_gazebo)/worlds/labyrinth.world"/>
   </include>
 
   <include file="$(find simple_robot_description_4wheels)/launch/description.launch">
