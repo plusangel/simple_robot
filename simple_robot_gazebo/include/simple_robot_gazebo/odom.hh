@@ -3,6 +3,10 @@
 
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
+#include <gazebo/common/common.hh>
+
+#include <ignition/math/Quaternion.hh>
+#include <ignition/math/Vector3.hh>
 
 // ROS
 #include "ros/ros.h"
@@ -30,7 +34,8 @@ namespace gazebo
     virtual void UpdateChild();
 
     private:
-      void publish_odometry();
+      void PublishOdometry(double step_time);
+      void UpdateOdometryEncoder();
 
       physics::WorldPtr world;
       physics::ModelPtr parent;
@@ -50,13 +55,20 @@ namespace gazebo
       double wheelSeparation;
       double wheelDiameter;
 
+      //time handling
+      double update_rate;
+      double update_period;
+      common::Time last_update_time;
+      common::Time last_odom_update;
+
       // ROS stuff
       ros::NodeHandle *rosnode_;
       ros::Publisher pub_odom;
       ros::Publisher pub_pose;
 
-      nav_msgs::Odometry odom_;
+      nav_msgs::Odometry odom;
       geometry_msgs::Pose2D pose_;
+      geometry_msgs::Pose2D pose_encoder;
 
       tf::TransformBroadcaster *transform_broadcaster_;
       std::string tf_prefix_;

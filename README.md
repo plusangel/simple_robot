@@ -25,6 +25,7 @@ __Gazebo simulation__
 roslaunch simple_robot_gazebo robot_2wheels.launch
 
 ```
+
 * For 4wheels model:
 
 ```
@@ -32,12 +33,14 @@ roslaunch simple_robot_gazebo robot_4wheels.launch
 ```
 
 
-
 __Rviz__
-* For 2wheels model:
+* For 2wheels model (with gazebo simulation run in parallel or no):
 
 ```
 roslaunch simple_robot_description_2wheels view_mobile_robot.launch
+```
+```
+roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo.launch
 ```
 
 * For 4wheels model:
@@ -62,14 +65,13 @@ roslaunch simple_robot_control test_velocities_4wheels.launch
 
 __Manual control: Use keyboard to control the robot__
 * For 2wheels model:
- 
+
 ```
-roslaunch simple_robot_control keyboard_teleop.launch
-roslaunch simple_robot_control twist_to_motors_2wheels.launch
+roslaunch simple_robot_control manual_control_2wheels.launch
 ```
 
 * For 4wheels model:
- 
+
 ```
 roslaunch simple_robot_control keyboard_teleop.launch
 roslaunch simple_robot_control twist_to_motors_4wheels.launch

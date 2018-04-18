@@ -206,6 +206,7 @@
             </inertial>
           </link>
 
+          <!-- Imu -->
           <link name="imu">
             <inertial>
               <mass value="0.001"/>

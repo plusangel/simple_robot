@@ -1,5 +1,6 @@
 #include "odom.hh"
 
+
 using namespace gazebo;
 
 enum
@@ -43,6 +44,9 @@ void OdomPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   this->wheelDiameter = atof((_sdf->GetElement("wheelDiameter")->Get<std::string>()).c_str());
   ROS_INFO ("[odom]: wheelDiameter: %f", this->wheelDiameter);
 
+  this->update_rate = atof((_sdf->GetElement("updateRate")->Get<std::string>()).c_str());
+  ROS_INFO ("[odom]: rate: %f", this->update_rate);
+
   this->robotNamespace = "";
 
   joints[LEFT] = this->parent->GetJoint(frontLeftJointName);
@@ -69,88 +73,113 @@ void OdomPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
   odomVel[1] = 0.0;
   odomVel[2] = 0.0;
 
+  if (update_rate > 0.0)
+    update_period = 1.0 / update_rate;
+  else
+    update_period = 0.0;
+
+  last_update_time = parent->GetWorld()->GetSimTime();
+
   // listen to the update event (broadcast every simulation iteration)
   this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&OdomPlugin::UpdateChild, this));
 }
 
 void OdomPlugin::UpdateChild()
 {
-  double ws, wd;
-  double d1, d2;
-  double dr, da;
-  double stepTime = this->world->GetPhysicsEngine()->GetMaxStepSize();
+  UpdateOdometryEncoder();
 
-  wd = wheelDiameter;
-  ws = wheelSeparation;
+  common::Time current_time = parent->GetWorld()->GetSimTime();
+  double seconds_since_last_update = (current_time - last_update_time).Double();
 
-  // Distance travelled from the front wheels
-  d1 = stepTime * wd / 2 * joints[LEFT]->GetVelocity(0);
-  d2 = stepTime * wd / 2 * joints[RIGHT]->GetVelocity(0);
-  //ROS_INFO(">>d1: %f - d2: %f", d1, d2);
+  if (seconds_since_last_update > update_period) {
+    PublishOdometry(seconds_since_last_update);
 
-  dr = (d1 + d2) / 2;
-  da = (d1 - d2) / ws;
-  //ROS_INFO(">>dr: %f - da: %f", dr, da);
-
-  // Compute odometric pose
-  odomPose[0] += dr * cos(odomPose[2]);
-  odomPose[1] += dr * sin(odomPose[2]);
-  odomPose[2] += da;
-
-  // Compute odometric instantaneous velocity
-  odomVel[0] = dr / stepTime;
-  odomVel[1] = 0.0;
-  odomVel[2] = da / stepTime;
-
-  publish_odometry();
+    last_update_time += common::Time(update_period);
+  }
 }
 
-void OdomPlugin::publish_odometry()
+void OdomPlugin::PublishOdometry(double step_time)
 {
+
   ros::Time current_time = ros::Time::now();
   std::string odom_frame = tf::resolve(tf_prefix_, "odom");
   std::string base_footprint_frame = tf::resolve(tf_prefix_, "base_footprint");
 
-  // getting data for base_footprint to odom transform
-  gazebo::physics::ModelState state(this->parent);
-  math::Pose pose = state.GetPose();
+  tf::Quaternion qt;
+  tf::Vector3 vt;
 
-  tf::Quaternion qt(pose.rot.x, pose.rot.y, pose.rot.z, pose.rot.w);
-  tf::Vector3 vt(pose.pos.x, pose.pos.y, pose.pos.z);
+  qt = tf::Quaternion ( odom.pose.pose.orientation.x, odom.pose.pose.orientation.y, odom.pose.pose.orientation.z, odom.pose.pose.orientation.w );
+  vt = tf::Vector3 ( odom.pose.pose.position.x, odom.pose.pose.position.y, odom.pose.pose.position.z );
 
-  tf::Transform base_footprint_to_odom(qt, vt);
-  transform_broadcaster_->sendTransform(tf::StampedTransform(base_footprint_to_odom, current_time, odom_frame, base_footprint_frame));
+  tf::Transform base_footprint_to_odom ( qt, vt );
+    transform_broadcaster_->sendTransform (
+        tf::StampedTransform ( base_footprint_to_odom, current_time,
+                               odom_frame, base_footprint_frame ) );
 
-   // publish odom topic
-   odom_.pose.pose.position.x = pose.pos.x;
-   odom_.pose.pose.position.y = pose.pos.y;
+    // set covariance
+    odom.pose.covariance[0] = 0.00001;
+    odom.pose.covariance[7] = 0.00001;
+    odom.pose.covariance[14] = 1000000000000.0;
+    odom.pose.covariance[21] = 1000000000000.0;
+    odom.pose.covariance[28] = 1000000000000.0;
+    odom.pose.covariance[35] = 0.001;
 
-   odom_.pose.pose.orientation.x = pose.rot.x;
-   odom_.pose.pose.orientation.y = pose.rot.y;
-   odom_.pose.pose.orientation.z = pose.rot.z;
-   odom_.pose.pose.orientation.w = pose.rot.w;
+    // set header
+    odom.header.stamp = current_time;
+    odom.header.frame_id = odom_frame;
+    odom.child_frame_id = base_footprint_frame;
 
-   math::Vector3 linear = this->parent->GetWorldLinearVel();
-   odom_.twist.twist.linear.x = linear.x;
-   odom_.twist.twist.linear.y = linear.y;
-   odom_.twist.twist.angular.z = this->parent->GetWorldAngularVel().z;
+    pub_odom.publish (odom);
+}
 
-   odom_.header.stamp = current_time;
-   odom_.header.frame_id = odom_frame;
-   odom_.child_frame_id = base_footprint_frame;
+void OdomPlugin::UpdateOdometryEncoder()
+{
+    double vl = joints[LEFT]->GetVelocity ( 0 );
+    double vr = joints[RIGHT]->GetVelocity ( 0 );
 
-   pub_odom.publish(odom_);
+    common::Time current_time = parent->GetWorld()->GetSimTime();
 
+    double seconds_since_last_update = ( current_time - last_odom_update ).Double();
+    last_odom_update = current_time;
 
-   double roll, pitch, yaw;
-   tf::Matrix3x3(qt).getRPY(roll, pitch, yaw);
-   //ROS_INFO("[odom]: Yaw: %f", yaw);
+    double b = wheelSeparation;
 
-   pose_.x = pose.pos.x;
-   pose_.y = pose.pos.y;
-   pose_.theta = yaw;
+    // Book: Sigwart 2011 Autonompus Mobile Robots page:337
+    double sl = vl * ( wheelDiameter / 2.0 ) * seconds_since_last_update;
+    double sr = vr * ( wheelDiameter / 2.0 ) * seconds_since_last_update;
+    double ssum = sl + sr;
 
-   pub_pose.publish(pose_);
+    double sdiff;
+    sdiff = sl - sr;
+    //sdiff = sr - sl;
+
+    double dx = ( ssum ) /2.0 * cos ( pose_encoder.theta + ( sdiff ) / ( 2.0*b ) );
+    double dy = ( ssum ) /2.0 * sin ( pose_encoder.theta + ( sdiff ) / ( 2.0*b ) );
+    double dtheta = ( sdiff ) /b;
+
+    pose_encoder.x += dx;
+    pose_encoder.y += dy;
+    pose_encoder.theta += dtheta;
+
+    double w = dtheta/seconds_since_last_update;
+    double v = sqrt ( dx*dx+dy*dy ) /seconds_since_last_update;
+
+    tf::Quaternion qt;
+    tf::Vector3 vt;
+    qt.setRPY ( 0,0,pose_encoder.theta );
+    vt = tf::Vector3 ( pose_encoder.x, pose_encoder.y, 0 );
+
+    odom.pose.pose.position.x = vt.x();
+    odom.pose.pose.position.y = vt.y();
+    odom.pose.pose.position.z = vt.z();
+
+    odom.pose.pose.orientation.x = qt.x();
+    odom.pose.pose.orientation.y = qt.y();
+    odom.pose.pose.orientation.z = qt.z();
+    odom.pose.pose.orientation.w = qt.w();
+
+    odom.twist.twist.linear.x = dx/seconds_since_last_update;
+    odom.twist.twist.linear.y = dy/seconds_since_last_update;
 }
 
 GZ_REGISTER_MODEL_PLUGIN(OdomPlugin)

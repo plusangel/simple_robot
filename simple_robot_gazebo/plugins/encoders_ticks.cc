@@ -4,7 +4,6 @@ using namespace gazebo;
 
 EncodersTicksPlugin::EncodersTicksPlugin() : ModelPlugin()
 {
-
 }
 
 
@@ -85,9 +84,12 @@ void EncodersTicksPlugin::OnUpdate(const common::UpdateInfo & /*_info*/)
     // get the left joint angle
     math::Angle left_angle = (this->jointList[1])->GetAngle(0);
 
+    double encoder_left0, encoder_right0;
+
     double angle_left = left_angle.Radian();
     double encoder_left = angle_left*(180/M_PI);
     encoder_left = encoders_multiplier * encoder_left;
+    encoder_left0 = encoder_left;
 
     // apply a normal distribution to the ticks count
     std::normal_distribution<double> distributionLeft(encoder_left, left_stddev);
@@ -102,6 +104,7 @@ void EncodersTicksPlugin::OnUpdate(const common::UpdateInfo & /*_info*/)
     double angle_right = right_angle.Radian();
     double encoder_right = angle_right*(180/M_PI);
     encoder_right = encoders_multiplier * encoder_right;
+    encoder_right0 = encoder_right;
 
     // apply a normal distribution to the ticks count
     std::normal_distribution<double> distributionRight(encoder_right, right_stddev);
@@ -109,7 +112,8 @@ void EncodersTicksPlugin::OnUpdate(const common::UpdateInfo & /*_info*/)
 
     // debug
     //ROS_INFO("[encoders]: Right %f at %d", encoder_right, milliTime);
-
+    //ROS_INFO("[encoders]: No-Noise: Right %f , Left :%f", encoder_right0, encoder_left0);
+    //ROS_INFO("[encoders]: Noisy: Right %f , Left :%f", encoder_right, encoder_left);
 
     msg.encoderTicks = {(float)encoder_left, (float)encoder_right};
     msg.timeStamp = milliTime;

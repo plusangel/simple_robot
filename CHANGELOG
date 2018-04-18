@@ -84,3 +84,22 @@ Laser scanner added to the 4-wheels robot
 
 0.2.5 simple_robot_description_2wheels
 IMU added to the 2-wheels robot
+
+0.2.5 simple_robot_gazebo (tested only to 2-wheels)
+In this version of the package we have introduced the following changes:
+- Added more debugging in encoders plugin to compare no-noisy (biased) encoders to
+to noisy ones.
+- Added a static TF mapping between new frame map and odom.
+- Added an unused (at the end) adapter to transform ground truth odometry to ground truth pose.
+- Move wheels plugin fixed to correctly insert bias between 2-sides.
+- Odom plugin changed from reporting the world state (accurate positioning from simulation) to Encoders
+based.
+
+0.2.6 simple_robot_description_2wheels
+In this version of the package we have introduced the following changes:
+- Ground truth odometry plugin
+- New IMU plugin to allow
+- new RViz launch file added to support gazebo simulation run in parallel without conflicts.
+
+0.2.6 simple_robot_control
+Manual control launch added.

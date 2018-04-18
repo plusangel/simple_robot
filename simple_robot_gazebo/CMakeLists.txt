@@ -43,6 +43,9 @@ include_directories(
   include/${PROJECT_NAME}/
 )
 
+add_executable(ground_truth_bridge src/ground_truth_pose.cpp)
+target_link_libraries(ground_truth_bridge ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+
 add_library(moveWheels_plugin plugins/move_wheels.cc)
 target_link_libraries(moveWheels_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 

@@ -20,6 +20,7 @@
       <frontRightJoint>front_right_joint</frontRightJoint>
       <wheelSeparation>0.15</wheelSeparation>
       <wheelDiameter>0.08</wheelDiameter>
+      <updateRate>40</updateRate>
     </plugin>
   </gazebo>
 
@@ -93,7 +94,15 @@
       </plugin>
     </gazebo>
 
-
-
+    <!-- Ground truth odometry -->
+    <gazebo>
+      <plugin filename="libgazebo_ros_p3d.so" name="quadrotor_groundtruth_sim">
+        <updateRate>40.0</updateRate>
+        <bodyName>base_link</bodyName>
+        <topicName>ground_truth/state</topicName>
+        <gaussianNoise>0.0</gaussianNoise>
+        <frameName>map</frameName>
+      </plugin>
+    </gazebo>
 
 </robot>

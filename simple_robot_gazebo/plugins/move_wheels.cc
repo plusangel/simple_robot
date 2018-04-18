@@ -68,19 +68,19 @@ void MoveWheelsPlugin::joints_velocities_callback(const std_msgs::Float32MultiAr
   //ROS_INFO("[motors]: Receive joint velocities %d, %d", vels[0], vels[1]);
 
   // apply the side offsets
-  vels[0] = left_offset*vels[0];
-  vels[1] = right_offset*vels[1];
+  //vels[0] = left_offset*vels[0];
+  //vels[1] = right_offset*vels[1];
 
   if (num_of_wheels == 2) {
     // apply the side offsets
     vels[1] = left_offset*vels[1];
     vels[0] = right_offset*vels[0];
 
-    //ROS_INFO("%f rad/s velocity for left wheels", vl);
+    //ROS_INFO("%f rad/s velocity for left wheels with offset %f", vels[1], left_offset);
     this->jointList[0]->SetParam("fmax", 0, 10000.0);
     this->jointList[0]->SetParam("vel", 0, (double)vels[1]);
 
-    //ROS_INFO("%f rad/s velocity for right wheels", vr);
+    //ROS_INFO("%f rad/s velocity for right wheels with offset %f", vels[0], right_offset);
     this->jointList[1]->SetParam("fmax", 0, 10000.0);
     this->jointList[1]->SetParam("vel", 0, (double)vels[0]);
   } else if (num_of_wheels == 4) {

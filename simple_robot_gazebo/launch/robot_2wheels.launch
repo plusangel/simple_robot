@@ -29,4 +29,6 @@
   <!--<include file="$(find simple_robot_control)/launch/mock_velocities.launch">
   </include>-->
 
+  <include file="$(find simple_robot_gazebo)/launch/ground_truth_bridge.launch" />
+
 </launch>
