@@ -18,8 +18,11 @@
     <plugin name="get_odom" filename="libodom_plugin.so">
       <frontLeftJoint>front_left_joint</frontLeftJoint>
       <frontRightJoint>front_right_joint</frontRightJoint>
+      <rearLeftJoint>rear_left_joint</rearLeftJoint>
+      <rearRightJoint>rear_right_joint</rearRightJoint>
       <wheelSeparation>0.46</wheelSeparation>
       <wheelDiameter>0.196</wheelDiameter>
+      <updateRate>40</updateRate>
     </plugin>
   </gazebo>
 

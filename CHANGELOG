@@ -1,3 +1,7 @@
+0.2.7 simple_robot_description_4wheels
+- odom plugin updated in gazebo file
+- package.xml fixed for all packages
+
 0.2.6 simple_robot_gazebo (tested only to 2-wheels)
 - Added a static transform between the EKF frame and the map (ground truth odometry)
 

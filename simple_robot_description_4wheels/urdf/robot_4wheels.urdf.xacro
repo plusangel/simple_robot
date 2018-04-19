@@ -128,7 +128,7 @@
   <xacro:wheel prefix="front_right" trans_x="${wheel_horizontal_separation}" trans_y="${-wheel_vertical_separation-wheel_width/2}" trans_z="${wheel_vertical_offset}"/>
   <xacro:wheel prefix="rear_left" trans_x="${-wheel_horizontal_separation}" trans_y="${wheel_vertical_separation+wheel_width/2}" trans_z="${wheel_vertical_offset}"/>
   <xacro:wheel prefix="rear_right" trans_x="${-wheel_horizontal_separation}" trans_y="${-wheel_vertical_separation-wheel_width/2}" trans_z="${wheel_vertical_offset}"/>
-    
+
   <!-- End of Wheels
   -->
 

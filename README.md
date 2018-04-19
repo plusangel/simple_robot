@@ -19,14 +19,14 @@ In this file you can set the offset between the left and the right side
 
 ## Execution
 __Gazebo simulation__
-* For 2wheels model:
+* For 2wheels model (you must set in config/motors_parameters.yaml num_of_wheels: 2):
 
 ```
 roslaunch simple_robot_gazebo robot_2wheels.launch
 
 ```
 
-* For 4wheels model:
+* For 4wheels model (you must set in config/motors_parameters.yaml num_of_wheels: 4):
 
 ```
 roslaunch simple_robot_gazebo robot_4wheels.launch
@@ -114,6 +114,11 @@ This is the ground truth robot pose taken directly from the gazebo simulation.
 
 The output of the Extended Kalman Filter after fusing the encoders and the IMU data
 
+## License
+
+BSD
+
+
 ## Software Setup
 
 Tested in:
@@ -124,11 +129,18 @@ ROS Kinetic,
 
 Gazebo 7.x
 
+
 ## Misc
 
 [Covariance matrix for /vo and /odom](https://answers.ros.org/question/64759/covariance-matrix-for-vo-and-odom/)
+
 
 ## Contributing
 
 Authors:
 Angelos Plastropoulos (angelos.plastropoulos@innotecuk.com)
+
+
+## Acknowledgements
+
+TBD
