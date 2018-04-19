@@ -18,17 +18,17 @@ find_package(catkin REQUIRED COMPONENTS
 # catkin_python_setup()
 
 ## Generate services in the 'srv' folder
-add_service_files(
-   FILES
-   reference.srv
- )
+# add_service_files(
+#   FILES
+#   reference.srv
+# )
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
-   DEPENDENCIES
-   geometry_msgs
-   std_msgs
- )
+# generate_messages(
+#   DEPENDENCIES
+#   geometry_msgs
+#   std_msgs
+# )
 
 catkin_package(
 #  INCLUDE_DIRS include
@@ -48,10 +48,10 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(controller src/controller.cpp)
-target_link_libraries(controller ${catkin_LIBRARIES})
-add_dependencies(controller simple_robot_control_generate_messages_cpp)
+#add_executable(controller src/controller.cpp)
+#target_link_libraries(controller ${catkin_LIBRARIES})
+#add_dependencies(controller simple_robot_control_generate_messages_cpp)
 
-add_executable(waypoints_generator src/waypoints_generator.cpp)
-target_link_libraries(waypoints_generator ${catkin_LIBRARIES})
-add_dependencies(waypoints_generator simple_robot_control_generate_messages_cpp)
+#add_executable(waypoints_generator src/waypoints_generator.cpp)
+#target_link_libraries(waypoints_generator ${catkin_LIBRARIES})
+#add_dependencies(waypoints_generator simple_robot_control_generate_messages_cpp)

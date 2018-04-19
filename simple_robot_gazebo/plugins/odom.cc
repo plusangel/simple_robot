@@ -111,18 +111,19 @@ void OdomPlugin::PublishOdometry(double step_time)
   qt = tf::Quaternion ( odom.pose.pose.orientation.x, odom.pose.pose.orientation.y, odom.pose.pose.orientation.z, odom.pose.pose.orientation.w );
   vt = tf::Vector3 ( odom.pose.pose.position.x, odom.pose.pose.position.y, odom.pose.pose.position.z );
 
+
   tf::Transform base_footprint_to_odom ( qt, vt );
     transform_broadcaster_->sendTransform (
         tf::StampedTransform ( base_footprint_to_odom, current_time,
                                odom_frame, base_footprint_frame ) );
-
+                               
     // set covariance
-    odom.pose.covariance[0] = 0.00001;
-    odom.pose.covariance[7] = 0.00001;
+    odom.pose.covariance[0] = 0.01;
+    odom.pose.covariance[7] = 0.01;
     odom.pose.covariance[14] = 1000000000000.0;
     odom.pose.covariance[21] = 1000000000000.0;
     odom.pose.covariance[28] = 1000000000000.0;
-    odom.pose.covariance[35] = 0.001;
+    odom.pose.covariance[35] = 0.1;
 
     // set header
     odom.header.stamp = current_time;

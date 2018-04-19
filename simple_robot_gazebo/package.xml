@@ -1,10 +1,8 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_gazebo</name>
-  <version>0.2.5</version>
-  <description>The diff_wheeled_robot_gazebo package</description>
-
-  <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
+  <version>0.2.6</version>
+  <description>The simple_robot_gazebo package</description>
 
   <license>BSD</license>
 

@@ -206,8 +206,10 @@
             </inertial>
           </link>
 
+
+
           <!-- Imu -->
-          <link name="imu">
+          <link name="imu_link">
             <inertial>
               <mass value="0.001"/>
               <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -217,10 +219,10 @@
 
           <joint name="imu_joint" type="fixed">
             <parent link="base_link" />
-            <child link="imu" />
+            <child link="imu_link" />
           </joint>
 
-          <!-- Bring in simulation data for Gazebo.-->
-          <xacro:include filename="$(find simple_robot_description_2wheels)/urdf/diff_wheeled_robot.gazebo" />
+    <!-- Bring in simulation data for Gazebo.-->
+    <xacro:include filename="$(find simple_robot_description_2wheels)/urdf/diff_wheeled_robot.gazebo" />
 
-        </robot>
+  </robot>

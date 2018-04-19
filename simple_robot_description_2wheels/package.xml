@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_description_2wheels</name>
-  <version>0.2.6</version>
-  <description>The mastering_ros_robot_description_pkg package</description>
-
-  <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
-
-  <license>BSD</license>
+  <version>0.2.7</version>
+  <description>The simple_robot_description_2wheels package</description>
 
   <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>
+
+  <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 

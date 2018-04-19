@@ -31,4 +31,7 @@
 
   <include file="$(find simple_robot_gazebo)/launch/ground_truth_bridge.launch" />
 
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom_combined"
+  args="0.0 0.0 0.0 0.0 0.0 0.0 /map /odom_combined 40" />
+
 </launch>

@@ -1,9 +1,0 @@
-<launch>
-
-  <node pkg="simple_robot_control" type="controller" name="controller" args="4" output="screen" >
-  </node>
-
-  <node pkg="simple_robot_control" type="waypoints_generator" name="waypoints_generator" output="screen" >
-  </node>
-
-</launch>

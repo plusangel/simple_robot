@@ -1,22 +1,17 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_control</name>
-  <version>0.2.6</version>
+  <version>0.2.7</version>
   <description>The simple_robot_control package</description>
 
-  <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
-  <maintainer email="artur.gmerek@innotecuk.com">Artur Gmerek</maintainer>
+  <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>
 
   <license>BSD</license>
-
-  <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>
-  <author email="artur.gmerek@innotecuk.com">Artur Gmerek</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>rospy</build_depend>
   <build_depend>std_msgs</build_depend>
-
 
   <run_depend>rospy</run_depend>
   <run_depend>std_msgs</run_depend>
