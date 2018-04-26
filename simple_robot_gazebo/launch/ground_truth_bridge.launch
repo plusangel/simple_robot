@@ -1,5 +1,0 @@
-<launch>
-  <node pkg="tf" type="static_transform_publisher" name="map_to_odom"
-  args="0.0 0.0 0.0 0.0 0.0 0.0 /map /odom 40" />
-  <node pkg="simple_robot_gazebo" type="ground_truth_bridge" name="ground_truth_bridge" output="screen" />
-</launch>

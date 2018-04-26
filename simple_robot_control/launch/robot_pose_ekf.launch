@@ -1,5 +1,11 @@
 <launch>
 
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom"
+  args="0.0 0.0 0.0 0.0 0.0 0.0 /map /odom 40" />
+
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom_combined"
+  args="0.0 0.0 0.0 0.0 0.0 0.0 /map /odom_combined 40" />
+
   <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
     <param name="output_frame" value="odom_combined"/>
     <param name="freq" value="40.0"/>

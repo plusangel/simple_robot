@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_control</name>
-  <version>0.2.7</version>
+  <version>0.2.8</version>
   <description>The simple_robot_control package</description>
 
   <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>
   <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
-  
+
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
@@ -17,6 +17,7 @@
   <run_depend>rospy</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>teleop_twist_keyboard</run_depend>
+  <run_depend>robot_pose_ekf</run_depend>
 
   <export>
   </export>

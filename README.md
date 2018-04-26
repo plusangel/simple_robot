@@ -79,7 +79,7 @@ roslaunch simple_robot_control twist_to_motors_4wheels.launch
 
 __Robot Pose EKF (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU__
 ```
-roslaunch robot_pose_ekf robot_pose_ekf.launch
+roslaunch simple_robot_control robot_pose_ekf.launch
 ```
 
 

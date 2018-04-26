@@ -1,3 +1,13 @@
+0.2.7 simple_robot_gazebo
+- Housekeeping
+
+0.2.8 simple_robot_description_2wheels
+- Sort out the two IMU plugins that works woth the differnet Kalman filter packages
+
+0.2.8 simple_robot_control
+- launch file added to start robot_pose_ekf including the required tf static
+  transformations to have an allowed tf tree
+
 0.2.7 simple_robot_description_4wheels
 - odom plugin updated in gazebo file
 - package.xml fixed for all packages

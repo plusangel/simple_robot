@@ -75,6 +75,7 @@
   </gazebo>
 
   <!-- imu -->
+  <!--
   <gazebo>
     <plugin name="imu" filename="libhector_gazebo_ros_imu.so">
       <updateRate>40.0</updateRate>
@@ -83,18 +84,21 @@
       <frameId>imu_link</frameId>
       <topicName>imu_data</topicName>
       <accelOffset>0 0 0</accelOffset>
-      <accelDrift>0.0 0.0 0.0</accelDrift>
-      <accelGaussianNoise>0.0 0.0 0.0</accelGaussianNoise>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
       <rateOffset>0 0 0</rateOffset>
-      <rateDrift>0.0 0.0 0.0</rateDrift>
-      <rateGaussianNoise>0.0 0.0 0.0</rateGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
       <headingOffset>0</headingOffset>
-      <headingDrift>0.0</headingDrift>
-      <headingGaussianNoise>0.0</headingGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
     </plugin>
   </gazebo>
+  -->
 
-  <!--<gazebo reference="imu_link">
+  <!-- works well with robot_pose_ekf localisation -->
+
+  <gazebo reference="imu_link">
     <sensor type="imu" name="imu">
       <imu>
       </imu>
@@ -102,13 +106,13 @@
         <bodyName>base_link</bodyName>
         <frameName>base_link</frameName>
         <topicName>imu_data</topicName>
-        <gaussianNoise>0.0</gaussianNoise>
+        <gaussianNoise>0.0000000289</gaussianNoise>
         <updateRateHZ>40.0</updateRateHZ>
         <xyzOffset>0.0 0.0 0.0</xyzOffset>
         <rpyOffset>0.0 0.0 0.0</rpyOffset>
       </plugin>
     </sensor>
-  </gazebo>-->
+  </gazebo>
 
   <!-- Ground truth odometry -->
   <gazebo>
