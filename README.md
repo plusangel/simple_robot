@@ -21,6 +21,7 @@ In this file you can set the offset between the left and the right side
 
 ## Execution
 __Gazebo simulation__
+
 * For 2wheels model (you must set in config/motors_parameters.yaml num_of_wheels: 2):
 
 ```
@@ -36,6 +37,7 @@ roslaunch simple_robot_gazebo robot_4wheels.launch
 
 
 __Rviz__
+
 * For 2wheels model (with gazebo simulation run in parallel or not):
 
 ```
@@ -51,7 +53,6 @@ For robot_localisation case:
 roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_localization.launch
 ```
 
-
 * For 4wheels model:
 
 ```
@@ -60,6 +61,7 @@ roslaunch simple_robot_description_4wheels view_mobile_robot.launch
 
 
 __Manual control: Send joint velocities to the robot__
+
 * For 2wheels model:
 
 ```
@@ -74,6 +76,7 @@ roslaunch simple_robot_control test_velocities_4wheels.launch
 
 
 __Manual control: Use keyboard to control the robot (differential drive)__
+
 * For 2wheels model:
 
 ```
