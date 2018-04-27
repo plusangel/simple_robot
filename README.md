@@ -93,12 +93,12 @@ roslaunch simple_robot_control twist_to_motors_4wheels.launch
 
 __Sensor Fusion using Extended Kalman Filters (please change to compatible IMU plugin in your gazebo file)__
 
-* robot_pose_ekf (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU
+* robot_pose_ekf (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU:
 ```
 roslaunch simple_robot_control robot_pose_ekf.launch
 ```
 
-* robot_localization (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU
+* robot_localization (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU:
 ```
 roslaunch simple_robot_control robot_localisation.launch
 ```
