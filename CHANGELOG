@@ -1,3 +1,15 @@
+0.2.9 simple_robot_control
+- robot_localization added and configured using the appropriate config file (so far).
+
+0.2.8 simple_robot_gazebo
+- twist covariance added
+
+0.2.9 simple_robot_description_2wheels
+In this version we changed:
+- further clean up in IMUs and the compatibility with the EKF packages
+- two new launch files based on the EKF packages
+- two new rviz files based on the EKF packages
+
 0.2.7 simple_robot_gazebo
 - Housekeeping
 

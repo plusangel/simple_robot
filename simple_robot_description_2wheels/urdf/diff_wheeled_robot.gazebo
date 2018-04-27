@@ -74,55 +74,58 @@
     </sensor>
   </gazebo>
 
-  <!-- imu -->
+  <!-- IMUs -->
+
+  <!-- works well with robot_localisation localisation
+  (in robot_pose_ekf you get an error because of the zero covariance in z)-->
   <!--
   <gazebo>
-    <plugin name="imu" filename="libhector_gazebo_ros_imu.so">
-      <updateRate>40.0</updateRate>
-      <robotNamespace>/</robotNamespace>
-      <bodyName>imu_link</bodyName>
-      <frameId>imu_link</frameId>
+  <plugin name="imu" filename="libhector_gazebo_ros_imu.so">
+  <updateRate>40.0</updateRate>
+  <robotNamespace>/</robotNamespace>
+  <bodyName>imu_link</bodyName>
+  <frameId>imu_link</frameId>
+  <topicName>imu_data</topicName>
+  <accelOffset>0 0 0</accelOffset>
+  <accelDrift>0.005 0.005 0.005</accelDrift>
+  <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+  <rateOffset>0 0 0</rateOffset>
+  <rateDrift>0.005 0.005 0.005 </rateDrift>
+  <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+  <headingOffset>0</headingOffset>
+  <headingDrift>0.005</headingDrift>
+  <headingGaussianNoise>0.005</headingGaussianNoise>
+</plugin>
+</gazebo>
+-->
+
+<!-- works well with robot_pose_ekf localisation -->
+<gazebo reference="imu_link">
+  <sensor type="imu" name="imu">
+    <imu>
+    </imu>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+      <bodyName>base_link</bodyName>
+      <frameName>base_link</frameName>
       <topicName>imu_data</topicName>
-      <accelOffset>0 0 0</accelOffset>
-      <accelDrift>0.005 0.005 0.005</accelDrift>
-      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
-      <rateOffset>0 0 0</rateOffset>
-      <rateDrift>0.005 0.005 0.005 </rateDrift>
-      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
-      <headingOffset>0</headingOffset>
-      <headingDrift>0.005</headingDrift>
-      <headingGaussianNoise>0.005</headingGaussianNoise>
+      <gaussianNoise>0.0000000289</gaussianNoise>
+      <updateRateHZ>40.0</updateRateHZ>
+      <xyzOffset>0.0 0.0 0.0</xyzOffset>
+      <rpyOffset>0.0 0.0 0.0</rpyOffset>
     </plugin>
-  </gazebo>
-  -->
+  </sensor>
+</gazebo>
 
-  <!-- works well with robot_pose_ekf localisation -->
 
-  <gazebo reference="imu_link">
-    <sensor type="imu" name="imu">
-      <imu>
-      </imu>
-      <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
-        <bodyName>base_link</bodyName>
-        <frameName>base_link</frameName>
-        <topicName>imu_data</topicName>
-        <gaussianNoise>0.0000000289</gaussianNoise>
-        <updateRateHZ>40.0</updateRateHZ>
-        <xyzOffset>0.0 0.0 0.0</xyzOffset>
-        <rpyOffset>0.0 0.0 0.0</rpyOffset>
-      </plugin>
-    </sensor>
-  </gazebo>
-
-  <!-- Ground truth odometry -->
-  <gazebo>
-    <plugin filename="libgazebo_ros_p3d.so" name="quadrotor_groundtruth_sim">
-      <updateRate>40.0</updateRate>
-      <bodyName>base_footprint</bodyName>
-      <topicName>ground_truth/state</topicName>
-      <gaussianNoise>0.0</gaussianNoise>
-      <frameName>map</frameName>
-    </plugin>
-  </gazebo>
+<!-- Ground truth odometry -->
+<gazebo>
+  <plugin filename="libgazebo_ros_p3d.so" name="quadrotor_groundtruth_sim">
+    <updateRate>40.0</updateRate>
+    <bodyName>base_footprint</bodyName>
+    <topicName>ground_truth/state</topicName>
+    <gaussianNoise>0.0</gaussianNoise>
+    <frameName>map</frameName>
+  </plugin>
+</gazebo>
 
 </robot>

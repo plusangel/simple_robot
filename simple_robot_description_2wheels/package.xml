@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>simple_robot_description_2wheels</name>
-  <version>0.2.8</version>
+  <version>0.2.9</version>
   <description>The simple_robot_description_2wheels package</description>
 
   <author email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</author>

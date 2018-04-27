@@ -116,19 +116,27 @@ void OdomPlugin::PublishOdometry(double step_time)
     transform_broadcaster_->sendTransform (
         tf::StampedTransform ( base_footprint_to_odom, current_time,
                                odom_frame, base_footprint_frame ) );
-                               
-    // set covariance
-    odom.pose.covariance[0] = 0.01;
-    odom.pose.covariance[7] = 0.01;
-    odom.pose.covariance[14] = 1000000000000.0;
-    odom.pose.covariance[21] = 1000000000000.0;
-    odom.pose.covariance[28] = 1000000000000.0;
-    odom.pose.covariance[35] = 0.1;
 
     // set header
     odom.header.stamp = current_time;
     odom.header.frame_id = odom_frame;
     odom.child_frame_id = base_footprint_frame;
+
+    // set pose covariance
+    odom.pose.covariance[0] = 0.001;
+    odom.pose.covariance[7] = 0.001;
+    odom.pose.covariance[14] = 1000000.0;
+    odom.pose.covariance[21] = 1000000.0;
+    odom.pose.covariance[28] = 1000000.0;
+    odom.pose.covariance[35] = 0.03;
+
+    // set twist covariance
+    odom.twist.covariance[0] = 0.001;
+    odom.twist.covariance[7] = 0.001;
+    odom.twist.covariance[14] = 1000000.0;
+    odom.twist.covariance[21] = 1000000.0;
+    odom.twist.covariance[28] = 1000000.0;
+    odom.twist.covariance[35] = 0.03;
 
     pub_odom.publish (odom);
 }

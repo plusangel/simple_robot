@@ -1,5 +1,8 @@
 <launch>
 
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom"
+  args="0.0 0.0 0.0 0.0 0.0 0.0 /map /odom 40" />
+
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
     <rosparam command="load" file="$(find simple_robot_control)/config/robot_localization.yaml" />
   </node>

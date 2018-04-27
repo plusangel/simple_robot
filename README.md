@@ -1,12 +1,14 @@
 # simple_robot
 
-This is a simple simulation of a differential drive mobile robots for real
-experiments. It does not use ros_control package so everything is manual.
+This is a simple simulation of differential drive mobile robots (2 and 4 wheels)
+for real experiments. It does not use ros_control package so everything is manual.
 You can send joint velocities from your controller framework and get back
 encoders ticks counts, like in real robot!
 
-At this configuration it support a 2 two wheel differential drive robot but it
-can asily expanded to 4 wheels differential drive robot.
+Because of its simplicity you can contuct your experiments with Kalman Filters and
+mapping without need to worry about the complexity of your model.
+
+Everything is there simple and visible in your fingertips.
 
 
 ## Configuration
@@ -39,9 +41,16 @@ __Rviz__
 ```
 roslaunch simple_robot_description_2wheels view_mobile_robot.launch
 ```
+
+For robot_pose_ekf case:
 ```
-roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo.launch
+roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_ekf.launch
 ```
+For robot_localisation case:
+```
+roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_localization.launch
+```
+
 
 * For 4wheels model:
 
@@ -63,6 +72,7 @@ roslaunch simple_robot_control test_velocities_2wheels.launch
 roslaunch simple_robot_control test_velocities_4wheels.launch
 ```
 
+
 __Manual control: Use keyboard to control the robot (differential drive)__
 * For 2wheels model:
 
@@ -77,9 +87,17 @@ roslaunch simple_robot_control keyboard_teleop.launch
 roslaunch simple_robot_control twist_to_motors_4wheels.launch
 ```
 
-__Robot Pose EKF (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU__
+
+__Sensor Fusion using Extended Kalman Filters (please change to compatible IMU plugin in your gazebo file)__
+
+* robot_pose_ekf (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU
 ```
 roslaunch simple_robot_control robot_pose_ekf.launch
+```
+
+* robot_localization (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU
+```
+roslaunch simple_robot_control robot_localisation.launch
 ```
 
 
@@ -112,7 +130,12 @@ This is the ground truth robot pose taken directly from the gazebo simulation.
 
 ~/robot_pose_ekf/odom_combined (geometry_msgs/PoseWithCovarianceStamped)
 
-The output of the Extended Kalman Filter after fusing the encoders and the IMU data
+The output of the Extended Kalman Filter using robot_pose_ekf
+
+~/odometry/filtered (nav_msgs/Odometry)
+
+The output of the Extended Kalman Filter using robot_localization
+
 
 ## License
 
