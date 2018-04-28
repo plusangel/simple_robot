@@ -1,15 +1,22 @@
-# simple_robot
+# simple_robot (ROS DIY)
 
 This is a simple simulation of differential drive mobile robots (2 and 4 wheels)
 for real experiments. It does not use ros_control package so everything is manual.
 You can send joint velocities from your controller framework and get back
 encoders ticks counts, like in real robot!
 
-Because of its simplicity you can contuct your experiments with Kalman Filters and
-mapping without need to worry about the complexity of your model.
+Using this package you can easily find and edit:
+- encoders (resolution, noise)
+- motors (imperfect amplifiers or noise)
+- IMUs
+- odometry covariances
+- ground truth pose of your robot
 
-Everything is there simple and visible in your fingertips.
+Because of its simplicity you can contuct your experiments with Kalman Filters 
+(robot_pose_ekf and robot_localization) and mapping without need to worry about 
+the complexity of your model.
 
+Everything is here simple and visible in your fingertips.
 
 ## Configuration
 
