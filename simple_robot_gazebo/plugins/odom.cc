@@ -111,35 +111,60 @@ void OdomPlugin::PublishOdometry(double step_time)
   qt = tf::Quaternion ( odom.pose.pose.orientation.x, odom.pose.pose.orientation.y, odom.pose.pose.orientation.z, odom.pose.pose.orientation.w );
   vt = tf::Vector3 ( odom.pose.pose.position.x, odom.pose.pose.position.y, odom.pose.pose.position.z );
 
+  /*
+  //getting data form gazebo world
+  math::Pose pose = parent->GetWorldPose();
+  qt = tf::Quaternion ( pose.rot.x, pose.rot.y, pose.rot.z, pose.rot.w );
+  vt = tf::Vector3 ( pose.pos.x, pose.pos.y, pose.pos.z );
+
+  odom.pose.pose.position.x = vt.x();
+  odom.pose.pose.position.y = vt.y();
+  odom.pose.pose.position.z = vt.z();
+
+  odom.pose.pose.orientation.x = qt.x();
+  odom.pose.pose.orientation.y = qt.y();
+  odom.pose.pose.orientation.z = qt.z();
+  odom.pose.pose.orientation.w = qt.w();
+
+  // get velocity in /odom frame
+  math::Vector3 linear;
+  linear = parent->GetWorldLinearVel();
+  odom.twist.twist.angular.z = parent->GetWorldAngularVel().z;
+
+  // convert velocity to child_frame_id (aka base_footprint)
+  float yaw = pose.rot.GetYaw();
+  odom.twist.twist.linear.x = cosf ( yaw ) * linear.x + sinf ( yaw ) * linear.y;
+  odom.twist.twist.linear.y = cosf ( yaw ) * linear.y - sinf ( yaw ) * linear.x;
+  */
 
   tf::Transform base_footprint_to_odom ( qt, vt );
-    transform_broadcaster_->sendTransform (
-        tf::StampedTransform ( base_footprint_to_odom, current_time,
-                               odom_frame, base_footprint_frame ) );
+  transform_broadcaster_->sendTransform (
+    tf::StampedTransform ( base_footprint_to_odom, current_time,
+      odom_frame, base_footprint_frame ) );
 
-    // set header
-    odom.header.stamp = current_time;
-    odom.header.frame_id = odom_frame;
-    odom.child_frame_id = base_footprint_frame;
+      // set header
+      odom.header.stamp = current_time;
+      odom.header.frame_id = odom_frame;
+      odom.child_frame_id = base_footprint_frame;
 
-    // set pose covariance
-    odom.pose.covariance[0] = 0.001;
-    odom.pose.covariance[7] = 0.001;
-    odom.pose.covariance[14] = 1000000.0;
-    odom.pose.covariance[21] = 1000000.0;
-    odom.pose.covariance[28] = 1000000.0;
-    odom.pose.covariance[35] = 0.03;
+      // set pose covariance
+      odom.pose.covariance[0] = 0.001;
+      odom.pose.covariance[7] = 0.001;
+      odom.pose.covariance[14] = 1000000.0;
+      odom.pose.covariance[21] = 1000000.0;
+      odom.pose.covariance[28] = 1000000.0;
+      odom.pose.covariance[35] = 0.03;
 
-    // set twist covariance
-    odom.twist.covariance[0] = 0.001;
-    odom.twist.covariance[7] = 0.001;
-    odom.twist.covariance[14] = 1000000.0;
-    odom.twist.covariance[21] = 1000000.0;
-    odom.twist.covariance[28] = 1000000.0;
-    odom.twist.covariance[35] = 0.03;
+      // set twist covariance
+      odom.twist.covariance[0] = 0.001;
+      odom.twist.covariance[7] = 0.001;
+      odom.twist.covariance[14] = 1000000.0;
+      odom.twist.covariance[21] = 1000000.0;
+      odom.twist.covariance[28] = 1000000.0;
+      odom.twist.covariance[35] = 0.03;
 
-    pub_odom.publish (odom);
-}
+      pub_odom.publish (odom);
+    }
 
 void OdomPlugin::UpdateOdometryEncoder()
 {

@@ -1,3 +1,6 @@
+0.2.9 simple_robot_description_2wheels
+- diameter fixed to reflect the robot model
+
 0.2.9 simple_robot_control
 - robot_localization added and configured using the appropriate config file (so far).
 
