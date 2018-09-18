@@ -18,7 +18,7 @@
     <plugin name="get_odom" filename="libodom_plugin.so">
       <frontLeftJoint>front_left_joint</frontLeftJoint>
       <frontRightJoint>front_right_joint</frontRightJoint>
-      <wheelSeparation>0.15</wheelSeparation>
+      <wheelSeparation>0.3</wheelSeparation>
       <wheelDiameter>0.08</wheelDiameter>
       <updateRate>40</updateRate>
     </plugin>
