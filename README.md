@@ -1,4 +1,4 @@
-# simple_robot (ROS DIY)
+# simple_robot stack
 
 This is a simple simulation of differential drive mobile robots (2 and 4 wheels)
 for real experiments. It does not use ros_control package so everything is manual.
@@ -12,8 +12,8 @@ Using this package you can easily find and edit:
 - odometry covariances
 - ground truth pose of your robot
 
-Because of its simplicity you can contuct your experiments with Kalman Filters 
-(robot_pose_ekf and robot_localization) and mapping without need to worry about 
+Because of its simplicity you can contuct your experiments with Kalman Filters
+(robot_pose_ekf and robot_localization) and mapping without need to worry about
 the complexity of your model.
 
 Everything is here simple and visible in your fingertips.
@@ -55,6 +55,7 @@ For robot_pose_ekf case:
 ```
 roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_ekf.launch
 ```
+
 For robot_localisation case:
 ```
 roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_localization.launch
@@ -64,21 +65,6 @@ roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_l
 
 ```
 roslaunch simple_robot_description_4wheels view_mobile_robot.launch
-```
-
-
-__Manual control: Send joint velocities to the robot__
-
-* For 2wheels model:
-
-```
-roslaunch simple_robot_control test_velocities_2wheels.launch
-```
-
-* For 4wheels model:
-
-```
-roslaunch simple_robot_control test_velocities_4wheels.launch
 ```
 
 
@@ -93,8 +79,7 @@ roslaunch simple_robot_control manual_control_2wheels.launch
 * For 4wheels model:
 
 ```
-roslaunch simple_robot_control keyboard_teleop.launch
-roslaunch simple_robot_control twist_to_motors_4wheels.launch
+roslaunch simple_robot_control manual_control_4wheels.launch
 ```
 
 
@@ -108,6 +93,30 @@ roslaunch simple_robot_control robot_pose_ekf.launch
 * robot_localization (extended Kalman Filter): Use extended Kalman filter to fuse encoders and IMU:
 ```
 roslaunch simple_robot_control robot_localisation.launch
+```
+
+__Testing__
+
+Send joint velocities to the robot
+
+* For 2wheels model:
+
+```
+roslaunch simple_robot_test test_hardware_interface_2wheels.launch
+```
+
+* For 4wheels model:
+
+```
+roslaunch simple_robot_test test_hardware_interface_4wheels.launch
+```
+
+Send cmdvel messages to the robot
+
+* For 2wheels model:
+
+```
+roslaunch simple_robot_test test_cmdvel_2wheels.launch
 ```
 
 
@@ -147,6 +156,11 @@ The output of the Extended Kalman Filter using robot_pose_ekf
 The output of the Extended Kalman Filter using robot_localization
 
 
+## Todo
+
+[update odometry for skid steer drive](http://docs.ros.org/jade/api/gazebo_plugins/html/gazebo__ros__skid__steer__drive_8cpp_source.html)
+
+
 ## License
 
 BSD
@@ -171,9 +185,5 @@ Gazebo 7.x
 ## Contributing
 
 Authors:
-Angelos Plastropoulos (angelos.plastropoulos@innotecuk.com)
 
-
-## Acknowledgements
-
-TBD
+[Angelos Plastropoulos](angelos.plastropoulos@innotecuk.com)

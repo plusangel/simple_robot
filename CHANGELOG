@@ -1,3 +1,14 @@
+0.2.10 simple_robot_control
+Package cleanup
+
+0.0.1 simple_robot_hardware_interface
+The package contains scripts that perform the translation of cmdvel messages to
+joint velocities. Initial commit.
+
+0.0.1 simple_robot_tests
+The package contains all the required tests for debugging the stack.
+Initial commit.
+
 0.2.9 simple_robot_description_2wheels
 - diameter fixed to reflect the robot model
 
