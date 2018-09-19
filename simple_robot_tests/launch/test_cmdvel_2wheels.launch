@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="simple_robot_tests" type="test_cmdvel.py" name="test_cmdvel" output="screen" />
+  <include file="$(find simple_robot_hardware_interface)/launch/twist_to_motors_2wheels.launch"/>
+</launch>

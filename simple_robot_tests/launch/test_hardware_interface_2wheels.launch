@@ -1,0 +1,7 @@
+<launch>
+
+  <arg name="wheels" default="2" />
+  <arg name="rotate" default="0" />
+  <node pkg="simple_robot_tests" type="test_hardware_interface.py" name="test_hardware_interface_2" args="$(arg wheels) $(arg rotate)" output="screen" />
+
+</launch>
