@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>simple_robot_tests</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>The simple_robot_tests package</description>
 
   <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
@@ -16,5 +16,5 @@
   <export>
 
   </export>
-  
+
 </package>

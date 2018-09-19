@@ -129,6 +129,14 @@ roslaunch simple_robot_test test_cmdvel_2wheels.launch
 In this topic you can find encoders custom messages published. Those messages contains the
 timestamp and the encoder ticks for each joint.
 
+~/cmd_vel (geometry_msgs/Twist)
+
+The standard topic to accept velocity (linear and angular) commands.
+
+~/imu_data (sensor_msgs/Imu)
+
+The standard imu message. 
+
 ~/odom (nav_msgs/Odometry)
 
 In this topic you can find nav_msgs messages published, indicating the odometry
