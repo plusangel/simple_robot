@@ -1,6 +1,0 @@
-<launch>
-
-  <node pkg="simple_robot_control" type="test_velocities.py" name="test_velocities" args="4" output="screen" >
-  </node>
-
-</launch>

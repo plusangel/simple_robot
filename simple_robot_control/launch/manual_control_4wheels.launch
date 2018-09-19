@@ -1,4 +1,4 @@
 <launch>
   <include file="$(find simple_robot_control)/launch/keyboard_teleop.launch"/>
-  <include file="$(find simple_robot_hardware_interface)/launch/twist_to_motors_2wheels.launch"/>
+  <include file="$(find simple_robot_hardware_interface)/launch/twist_to_motors_4wheels.launch"/>
 </launch>
