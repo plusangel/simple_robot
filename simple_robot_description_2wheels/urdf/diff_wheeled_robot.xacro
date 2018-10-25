@@ -207,9 +207,16 @@
           </link>
 
 
+          <!-- Imu 1-->
+          <link name="imu_link1">
+            <visual>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <geometry>
+                <box size="0.01 0.01 0.01" />
+              </geometry>
+               <material name="Blue" />
+            </visual>
 
-          <!-- Imu -->
-          <link name="imu_link">
             <inertial>
               <mass value="0.001"/>
               <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -217,9 +224,43 @@
             </inertial>
           </link>
 
-          <joint name="imu_joint" type="fixed">
+          <gazebo reference="imu_link1">
+            <material>Gazebo/Blue</material>
+            <turnGravityOff>false</turnGravityOff>
+          </gazebo>
+
+          <joint name="imu_joint1" type="fixed">
+            <origin xyz="0.135 0 0.01" rpy="0 0 0"/>
             <parent link="base_link" />
-            <child link="imu_link" />
+            <child link="imu_link1" />
+          </joint>
+
+          <!-- Imu 2-->
+          <link name="imu_link2">
+            <visual>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <geometry>
+                <box size="0.01 0.01 0.01" />
+              </geometry>
+               <material name="Red" />
+            </visual>
+
+            <inertial>
+              <mass value="0.001"/>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+            </inertial>
+          </link>
+
+          <gazebo reference="imu_link2">
+            <material>Gazebo/Red</material>
+            <turnGravityOff>false</turnGravityOff>
+          </gazebo>
+
+          <joint name="imu_joint2" type="fixed">
+            <origin xyz="-0.135 0 0.01" rpy="0 0 0"/>
+            <parent link="base_link" />
+            <child link="imu_link2" />
           </joint>
 
     <!-- Bring in simulation data for Gazebo.-->

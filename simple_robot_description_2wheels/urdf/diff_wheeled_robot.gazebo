@@ -78,29 +78,48 @@
 
   <!-- works well with robot_localisation localisation
   (in robot_pose_ekf you get an error because of the zero covariance in z)-->
-  <!--
+  
   <gazebo>
-  <plugin name="imu" filename="libhector_gazebo_ros_imu.so">
-  <updateRate>40.0</updateRate>
-  <robotNamespace>/</robotNamespace>
-  <bodyName>imu_link</bodyName>
-  <frameId>imu_link</frameId>
-  <topicName>imu_data</topicName>
-  <accelOffset>0 0 0</accelOffset>
-  <accelDrift>0.005 0.005 0.005</accelDrift>
-  <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
-  <rateOffset>0 0 0</rateOffset>
-  <rateDrift>0.005 0.005 0.005 </rateDrift>
-  <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
-  <headingOffset>0</headingOffset>
-  <headingDrift>0.005</headingDrift>
-  <headingGaussianNoise>0.005</headingGaussianNoise>
-</plugin>
-</gazebo>
--->
+    <plugin name="imu" filename="libhector_gazebo_ros_imu.so">
+      <updateRate>40.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <bodyName>imu_link1</bodyName>
+      <frameId>imu_link1</frameId>
+      <topicName>imu_data_blue</topicName>
+      <accelOffset>0 0 0</accelOffset>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateOffset>0 0 0</rateOffset>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingOffset>0</headingOffset>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="imu" filename="libhector_gazebo_ros_imu.so">
+      <updateRate>40.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <bodyName>imu_link2</bodyName>
+      <frameId>imu_link2</frameId>
+      <topicName>imu_data_red</topicName>
+      <accelOffset>0 0 0</accelOffset>
+      <accelDrift>0.05 0.05 0.05</accelDrift>
+      <accelGaussianNoise>0.5 0.5 0.5</accelGaussianNoise>
+      <rateOffset>0 0 0</rateOffset>
+      <rateDrift>0.05 0.05 0.05 </rateDrift>
+      <rateGaussianNoise>0.5 0.5 0.5 </rateGaussianNoise>
+      <headingOffset>10</headingOffset>
+      <headingDrift>0.05</headingDrift>
+      <headingGaussianNoise>0.5</headingGaussianNoise>
+    </plugin>
+  </gazebo>
+
 
 <!-- works well with robot_pose_ekf localisation -->
-<gazebo reference="imu_link">
+<!-- <gazebo reference="imu_link1">
   <sensor type="imu" name="imu">
     <imu>
     </imu>
@@ -114,7 +133,7 @@
       <rpyOffset>0.0 0.0 0.0</rpyOffset>
     </plugin>
   </sensor>
-</gazebo>
+</gazebo>-->
 
 
 <!-- Ground truth odometry -->
