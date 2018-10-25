@@ -51,12 +51,12 @@ __Rviz__
 roslaunch simple_robot_description_2wheels view_mobile_robot.launch
 ```
 
-For robot_pose_ekf case:
+* For robot_pose_ekf case:
 ```
 roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_ekf.launch
 ```
 
-For robot_localisation case:
+* For robot_localisation case:
 ```
 roslaunch simple_robot_description_2wheels view_mobile_robot_with_gazebo_robot_localization.launch
 ```
@@ -124,7 +124,7 @@ roslaunch simple_robot_test test_cmdvel_2wheels.launch
 
 ### Topics
 
-~/encoders (simple_robot_gazebo/encoders msg):
+~/encoders (simple_robot_gazebo/encoders msg)
 
 In this topic you can find encoders custom messages published. Those messages contains the
 timestamp and the encoder ticks for each joint.
@@ -163,6 +163,9 @@ The output of the Extended Kalman Filter using robot_pose_ekf
 
 The output of the Extended Kalman Filter using robot_localization
 
+
+## Comments
+In order to use the hector IMU (suitable for robot localisation), you need to install the [hector_gazebo_plugins](http://wiki.ros.org/hector_gazebo_plugins)
 
 ## Todo
 

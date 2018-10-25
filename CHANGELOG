@@ -1,3 +1,13 @@
+0.2.11 simple_robot_control
+- robot localisation further explored
+
+0.2.10 simple_robot_description_2wheels
+- second IMU added to simulate a scenario like in SIRCAUR project
+
+0.2.9 simple_robot_gazebo
+- fix a bug regarding the publish of the yaw velocity in the odom topic
+- added the option to publish the tf from odom frame to base_link frame
+
 0.0.3 simple_robot_tests
 A simple service server to move the robot added.
 
