@@ -1,7 +1,8 @@
 <launch>
 
   <rosparam command="load" file="$(find simple_robot_gazebo)/config/motors_parameters.yaml" />
-
+  <rosparam command="load" file="$(find simple_robot_gazebo)/config/general_parameters.yaml" />
+  
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>

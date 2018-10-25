@@ -54,6 +54,7 @@ namespace gazebo
 
       double wheelSeparation;
       double wheelDiameter;
+      int publish_tf;
 
       //time handling
       double update_rate;
