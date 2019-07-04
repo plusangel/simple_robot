@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>simple_robot</name>
+  <version>0.0.1</version>
+  <description>The simple_robot package</description>
+
+  <maintainer email="angelos.plastropoulos@innotecuk.com">Angelos Plastropoulos</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>

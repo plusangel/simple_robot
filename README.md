@@ -27,6 +27,13 @@ In this file you can set the offset between the left and the right side
 
 
 ## Execution
+
+__2 wheels robot simulation__
+```
+roslaunch simple_robot robot.launch
+
+```
+
 __Gazebo simulation__
 
 * For 2wheels model (you must set in config/motors_parameters.yaml num_of_wheels: 2):

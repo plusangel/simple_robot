@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find simple_robot_gazebo)/launch/robot_2wheels.launch"/> 
+    <include file="$(find simple_robot_hardware_interface)/launch/twist_to_motors_2wheels.launch"/>
+</launch>
