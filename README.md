@@ -18,6 +18,24 @@ the complexity of your model.
 
 Everything is here simple and visible in your fingertips.
 
+
+## Install directly from gitlab
+
+Open terminal and navigate to src folder in your catkin workspace:
+```
+cd ~/catkin_ws/src
+```
+
+Then clone the repository using:
+```
+git clone -b hydro-devel https://gitlab.com/innotecuk-public/simple_robot.git
+```
+
+Once it is completed, do the following:
+```
+cd ~/catkin_ws && catkin_make
+```
+
 ## Configuration
 
 You can find the configuration yaml file inside the simple_robot_gazebo package.
@@ -40,7 +58,6 @@ __Gazebo simulation__
 
 ```
 roslaunch simple_robot_gazebo robot_2wheels.launch
-
 ```
 
 * For 4wheels model (you must set in config/motors_parameters.yaml num_of_wheels: 4):
