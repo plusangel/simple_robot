@@ -28,7 +28,7 @@ cd ~/catkin_ws/src
 
 Then clone the repository using:
 ```
-git clone -b hydro-devel https://gitlab.com/innotecuk-public/simple_robot.git
+git clone https://gitlab.com/innotecuk-public/simple_robot.git
 ```
 
 Once it is completed, do the following:
