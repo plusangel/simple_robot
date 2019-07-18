@@ -37,7 +37,7 @@ class Twist_To_Motors:
             self.right = 1.0 * self.linearVelocity + self.angularVelocity * self.baseWidth / 2
             self.left = 1.0 * self.linearVelocity - self.angularVelocity * self.baseWidth / 2
 
-            rospy.loginfo("Sending velocities to wheels... vl:{0}, vr:{1}".format(self.left, self.right))
+            rospy.loginfo("wheels velocities vl, vr [{0:.3f},{1:.3f}]".format(self.left, self.right))
 
             if self.numOfWheels == 2:
                 # first item is left and second is right

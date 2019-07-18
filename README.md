@@ -28,7 +28,7 @@ In this file you can set the offset between the left and the right side
 
 ## Execution
 
-__2 wheels robot simulation__
+__2 wheels robot simulation (all included)__
 ```
 roslaunch simple_robot robot.launch
 
@@ -103,7 +103,6 @@ roslaunch simple_robot_control robot_localisation.launch
 ```
 
 __Testing__
-
 Send joint velocities to the robot
 
 * For 2wheels model:
@@ -128,9 +127,6 @@ roslaunch simple_robot_test test_cmdvel_2wheels.launch
 
 
 ## IOs
-
-### Topics
-
 ~/encoders (simple_robot_gazebo/encoders msg)
 
 In this topic you can find encoders custom messages published. Those messages contains the
@@ -174,18 +170,16 @@ The output of the Extended Kalman Filter using robot_localization
 ## Comments
 In order to use the hector IMU (suitable for robot localisation), you need to install the [hector_gazebo_plugins](http://wiki.ros.org/hector_gazebo_plugins)
 
-## Todo
 
+## Todo
 [update odometry for skid steer drive](http://docs.ros.org/jade/api/gazebo_plugins/html/gazebo__ros__skid__steer__drive_8cpp_source.html)
 
 
 ## License
-
-BSD
+MIT
 
 
 ## Software Setup
-
 Tested in:
 
 Ubuntu Xenial 16.04,
@@ -196,12 +190,8 @@ Gazebo 7.x
 
 
 ## Misc
-
 [Covariance matrix for /vo and /odom](https://answers.ros.org/question/64759/covariance-matrix-for-vo-and-odom/)
 
 
 ## Contributing
-
-Authors:
-
 [Angelos Plastropoulos](angelos.plastropoulos@innotecuk.com)
