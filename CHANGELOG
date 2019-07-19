@@ -1,3 +1,6 @@
+0.2.11 simple_robot_description_2wheels
+In this version we added a stereo vision camera to the 2-wheeled robot model
+
 0.0.2 simple_robot_hardware_interface
 - improve the printing of the module
 

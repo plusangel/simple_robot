@@ -176,14 +176,14 @@
           <wheel fb="front" lr="right" parent="base_link" translateX="0" translateY="0.5" flipY="1"/>
           <wheel fb="front" lr="left" parent="base_link" translateX="0" translateY="-0.5" flipY="1"/>
 
+            <!--
+            <joint name="hokuyo_joint" type="fixed">
+              <origin xyz="0 0 0.04" rpy="0 0 0"/>
+              <parent link="base_link"/>
+              <child link="hokuyo_link"/>
+            </joint>
 
-          <joint name="hokuyo_joint" type="fixed">
-            <origin xyz="0 0 0.04" rpy="0 0 0"/>
-            <parent link="base_link"/>
-            <child link="hokuyo_link"/>
-          </joint> -->
-
-          <!-- Hokuyo Laser -->
+          Hokuyo Laser
           <link name="hokuyo_link">
             <collision>
               <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -204,7 +204,7 @@
               <origin xyz="0 0 0" rpy="0 0 0"/>
               <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
             </inertial>
-          </link>
+          </link>-->
 
 
           <!-- Imu 1-->
@@ -262,6 +262,72 @@
             <parent link="base_link" />
             <child link="imu_link2" />
           </joint>
+
+          <!-- Kinect -->
+          <joint name="camera_rgb_joint" type="fixed">
+            <origin xyz="0 0 0.05" rpy="0 0 0"/>
+            <parent link="base_link"/>
+            <child link="camera_rgb_frame" />
+          </joint>
+
+          <link name="camera_rgb_frame"/>
+
+          <joint name="camera_rgb_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+            <parent link="camera_rgb_frame" />
+            <child link="camera_rgb_optical_frame" />
+          </joint>
+
+          <link name="camera_rgb_optical_frame"/>
+
+          <joint name="camera_joint" type="fixed">
+            <origin xyz="-0.031 0 -0.016" rpy="0 0 0"/>
+            <parent link="camera_rgb_frame"/>
+            <child link="camera_link"/>
+          </joint>
+
+          <link name="camera_link">
+            <visual>
+              <origin xyz="0 0 0" rpy="0 0 ${M_PI/2}"/>
+              <geometry>
+                <mesh filename="package://simple_robot_description_2wheels/meshes/kinect.dae"/>
+              </geometry>
+            </visual>
+            <collision>
+              <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+              <geometry>
+                <box size="0.07271 0.27794 0.073"/>
+              </geometry>
+            </collision>
+            <inertial>
+              <mass value="0.564" />
+              <origin xyz="0 0 0" />
+              <inertia ixx="0.003881243" ixy="0.0" ixz="0.0"
+                       iyy="0.000498940" iyz="0.0"
+                       izz="0.003879257" />
+            </inertial>
+          </link>
+
+          <!-- The fixed joints & links below are usually published by static_transformers launched by the OpenNi launch
+               files. However, for Gazebo simulation we need them, so we add them here.
+               (Hence, don't publish them additionally!) -->
+          <joint name="camera_depth_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <parent link="camera_rgb_frame" />
+            <child link="camera_depth_frame" />
+          </joint>
+          <link name="camera_depth_frame"/>
+
+          <joint name="camera_depth_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+            <parent link="camera_depth_frame" />
+            <child link="camera_depth_optical_frame" />
+          </joint>
+          <link name="camera_depth_optical_frame"/>
+
+    <!-- Kinect sensor for simulation
+    <turtlebot_sim_3dsensor/> -->
+
 
     <!-- Bring in simulation data for Gazebo.-->
     <xacro:include filename="$(find simple_robot_description_2wheels)/urdf/diff_wheeled_robot.gazebo" />
