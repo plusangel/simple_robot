@@ -1,3 +1,6 @@
+0.2.12 simple_robot_control
+We added a more interesting world for the simulation
+
 0.2.11 simple_robot_description_2wheels
 In this version we added a stereo vision camera to the 2-wheeled robot model
 
