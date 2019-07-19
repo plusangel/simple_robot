@@ -1,4 +1,8 @@
 <launch>
-    <include file="$(find simple_robot_gazebo)/launch/robot_2wheels.launch"/> 
+    <arg name="gui" default="true"/>
+
+    <include file="$(find simple_robot_gazebo)/launch/robot_2wheels.launch">
+        <arg name="gui" value="$(arg gui)" />
+    </include>
     <include file="$(find simple_robot_hardware_interface)/launch/twist_to_motors_2wheels.launch"/>
 </launch>

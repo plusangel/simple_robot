@@ -1,3 +1,6 @@
+0.0.2 simple_robot
+- headless simulation enabled
+
 0.2.12 simple_robot_control
 We added a more interesting world for the simulation
 
